@@ -1,109 +1,32 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import GoldCoin from '../components/GoldCoin.astro';
-import '../styles/frenugo.css';
+import '../styles/bridge.css';
+import '@fontsource-variable/archivo';
+import '@fontsource-variable/archivo/wght-italic.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
 const base=import.meta.env.BASE_URL;
+const tg='https://t.me/frenchug';
+const words=['Rewards','Cash','Money','Dough','Dinero','$$$','Rewards'];
+const cards=[['01','Results','Every published result, in one place. Open the channel and explore the numbers.'],['02','Statistics','A closer look at performance, with the details behind the numbers.'],['03','Updates','Follow the latest updates. The public channel is free to explore.'],['04','Telegram','FRENUGO is on Telegram. Join the channel and stay connected.'],['05','Performance','See the available trading statistics and the context behind them.'],['06','Signals','Explore the private channel and how trading signals are presented.'],['07','The numbers','Historical results are available on the statistics page.'],['08','FRENUGO','Results, updates and statistics. Everything starts with a closer look.']];
 ---
-<Layout title="FRENUGO — results, signals, Telegram" description="FRENUGO — результаты сделок, статистика и доступ к торговым сигналам в Telegram." bodyClass="frenugo-home">
-  <div class="fn-app">
-    <section class="fn-hero" id="top">
-      <div class="fn-hero-top fn-kicker"><span>FRENUGO®</span><span>THE NUMBERS ARE REAL*</span></div>
-      <div class="fn-hero-coins"><GoldCoin/><GoldCoin/><GoldCoin/></div>
-      <h1 class="fn-hero-title"><span class="fn-swap-word"><span id="fn-changing-word">EARN</span></span><span class="fn-hero-title-lower">MORE.</span></h1>
-      <div class="fn-hero-sticker">REAL<br/>RESULTS.<br/>NO HYPE.</div>
-      <div class="fn-hero-footer">
-        <p>Every result has a story.<br/>See the numbers first.</p>
-        <a class="fn-scroll-hint" href="#earn">SCROLL TO EXPLORE ↓</a>
-        <a class="fn-btn" href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer" data-track="fn_hero_telegram">JOIN TELEGRAM <span>↗</span></a>
-      </div>
-    </section>
-
-    <div class="fn-tape" aria-hidden="true"><div class="fn-tape-track"><span>FRENUGO <i>✦</i> REAL RESULTS <i>✦</i> GET IN <i>✦</i> FRENUGO <i>✦</i> REAL RESULTS <i>✦</i> GET IN <i>✦</i>&nbsp;</span><span>FRENUGO <i>✦</i> REAL RESULTS <i>✦</i> GET IN <i>✦</i> FRENUGO <i>✦</i> REAL RESULTS <i>✦</i> GET IN <i>✦</i>&nbsp;</span></div></div>
-
-    <section class="fn-earn" id="earn">
-      <div class="fn-section-label"><span>01 / GET THE PICTURE</span><span>FRENUGO 2026</span></div>
-      <h2 class="fn-fade-up">Results on <span class="fn-heading-accent">everything.</span></h2>
-      <div class="fn-earn-content">
-        <div class="fn-earn-copy fn-fade-up">
-          <p>See the performance. Follow the journey. Keep your eyes on the numbers.</p>
-          <a href={base+'stats/'} class="fn-btn">SEE THE RESULTS <span>↗</span></a>
-        </div>
-        <div class="fn-earn-art" aria-label="Decorative 3D mobile performance dashboard">
-          <div class="fn-smartphone">
-            <div class="fn-phone-notch"></div>
-            <div class="fn-phone-inner"><span class="fn-phone-brand">frenugo.</span><h3>+4,619<span style="font-size:.38em"> USD</span></h3><span class="fn-kicker">HISTORICAL PNL*</span>
-              <div class="fn-phone-chart" aria-hidden="true"><svg viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M0 99 L28 91 L45 100 L70 75 L98 85 L126 56 L154 64 L179 44 L201 52 L230 17 L249 27 L274 12 L300 5"/></svg></div>
-              <span class="fn-kicker">44% WIN RATE*</span><div class="fn-phone-pill">VIEW PERFORMANCE ↗</div>
-              <div class="fn-phone-bottom"><span>STATISTICS</span><span>FRENUGO®</span></div>
-            </div>
-          </div>
-          <GoldCoin/><GoldCoin/><GoldCoin/>
-        </div>
-      </div>
-    </section>
-
-    <section class="fn-how" id="how">
-      <div class="fn-section-label"><span>02 / HOW IT WORKS</span><span>THREE SIMPLE STEPS</span></div>
-      <div class="fn-how-head"><h2 class="fn-fade-up">How it<br/>works.</h2><p class="fn-fade-up">Everything important, without the noise. Pick where you want to start.</p></div>
-      <div class="fn-how-row">
-        <div class="fn-how-number">01</div>
-        <div class="fn-how-copy fn-fade-up"><h3>See the<br/>results.</h3><p>View the available statistics and the context behind the figures.</p></div>
-        <div class="fn-how-art"><div class="fn-mini-stat">44<span>%</span></div><GoldCoin/><span class="fn-signal-bubble">WIN RATE*</span></div>
-      </div>
-      <div class="fn-how-row">
-        <div class="fn-how-number">02</div>
-        <div class="fn-how-copy fn-fade-up"><h3>Explore<br/>signals.</h3><p>Understand what the private channel includes and how a signal is presented.</p></div>
-        <div class="fn-how-art fn-how-art-dark"><div class="fn-mini-stat">BTC ↗</div><GoldCoin/><span class="fn-signal-bubble">ENTRY / SL / TP</span></div>
-      </div>
-      <div class="fn-how-row">
-        <div class="fn-how-number">03</div>
-        <div class="fn-how-copy fn-fade-up"><h3>Get<br/>connected.</h3><p>Step into the public Telegram channel or read the subscription details.</p></div>
-        <div class="fn-how-art fn-how-art-cream"><div class="fn-mini-stat">@frenugo</div><GoldCoin/><span class="fn-signal-bubble">JOIN THE CHANNEL ↗</span></div>
-      </div>
-    </section>
-
-    <section class="fn-metal">
-      <div class="fn-section-label"><span>03 / GOLD STANDARD</span><span>FRENUGO®</span></div>
-      <GoldCoin/><GoldCoin/>
-      <h2 class="fn-metal-title">FRENUGO</h2>
-      <div class="fn-metal-footer"><span>GOOD DATA. CLEAR DECISIONS.</span><span>KEEP SCROLLING ↓</span></div>
-    </section>
-
-    <section class="fn-plans" id="plans">
-      <div class="fn-section-label"><span>04 / PICK YOUR ACCESS</span><span>PUBLIC / PRIVATE</span></div>
-      <h2 class="fn-fade-up">Choose your<br/>side.</h2>
-      <div class="fn-plans-grid">
-        <article class="fn-plan">
-          <div class="fn-plan-head"><span>PUBLIC</span><span>01 / 02</span></div>
-          <h3>FREE.</h3><p class="fn-plan-sub">THE PUBLIC TELEGRAM CHANNEL</p>
-          <div class="fn-plan-price">$0 <small>FOREVER</small></div>
-          <ul><li>News and updates</li><li>Published trading observations</li><li>General market conversation</li><li>Free access to the channel</li></ul>
-          <a href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer" class="fn-btn fn-btn-outline" data-track="fn_free_plan">JOIN PUBLIC CHANNEL ↗</a>
-        </article>
-        <article class="fn-plan fn-plan-featured">
-          <div class="fn-plan-head"><span>PRIVATE</span><span>02 / 02</span></div>
-          <h3>PRO.</h3><p class="fn-plan-sub">PRIVATE TELEGRAM SIGNALS / 18+</p>
-          <div class="fn-plan-price">$73 <small>/ 30 DAYS</small></div>
-          <ul><li>Private signal channel</li><li>Entry, stop, take-profit levels</li><li>Risk parameters per signal</li><li>No automatic renewal</li></ul>
-          <a href={base+'signals/'} class="fn-btn" data-track="fn_pro_plan">EXPLORE THE PLAN ↗</a>
-        </article>
-      </div>
-    </section>
-
-    <section class="fn-counter" id="results">
-      <div class="fn-section-label"><span>05 / THE NUMBERS</span><span>HISTORICAL PERFORMANCE*</span></div>
-      <h2 class="fn-fade-up">Numbers<br/>do the talking.</h2>
-      <GoldCoin/>
-      <div class="fn-counter-number"><span>+</span><span data-counter="4619">4,619</span></div>
-      <div class="fn-counter-foot"><span>USD / REPORTED PNL</span><p>*Historical author-reported PNL and 44% win rate, not independently audited. Trading can result in loss; past performance does not predict future outcomes.</p><a href={base+'stats/'} class="fn-btn">VIEW THE STATS ↗</a></div>
-    </section>
-
-    <section class="fn-finale">
-      <div class="fn-section-label"><span>06 / TAKE THE NEXT STEP</span><span>FRENUGO®</span></div>
-      <h2 class="fn-fade-up">GET IN.<br/><em>STAY IN.</em></h2>
-      <div class="fn-finale-action"><p>One channel. The numbers and updates in one place.</p><a href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer" class="fn-btn fn-btn-light" data-track="fn_final_telegram">GET FRENUGO ↗</a></div>
-      <div class="fn-finale-wordmark" aria-hidden="true">frenugo.</div>
-    </section>
-  </div>
-</Layout>
-<script>import '../scripts/frenugo';</script>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>FRENUGO</title><meta name="description" content="FRENUGO. Results, statistics and Telegram."/><meta name="theme-color" content="#050505"/><link rel="icon" href={base+'favicon.svg'}/><link rel="canonical" href={new URL(base,Astro.site)}/><meta property="og:title" content="FRENUGO"/></head>
+<body><a class="skip-link" href="#main">Skip to content</a><div class="grain" aria-hidden="true"></div>
+<header class="bridge-nav"><a class="brand" href="#top" aria-label="FRENUGO home">FRENUGO</a><nav class="icon-nav" aria-label="Main navigation">
+<div class="nav-item"><button aria-label="Earn" aria-expanded="false" aria-controls="earn-menu">$</button><div class="nav-drop" id="earn-menu"><a href="#earn">Earn ↗</a></div></div>
+<div class="nav-item"><button aria-label="How it works" aria-expanded="false" aria-controls="how-menu">ϟ</button><div class="nav-drop" id="how-menu"><a href="#how">How It Works ↗</a><a href={base+'stats/'}>Statistics ↗</a></div></div>
+<div class="nav-item"><button aria-label="More" aria-expanded="false" aria-controls="more-menu">#</button><div class="nav-drop" id="more-menu"><a href={base+'signals/'}>Signals ↗</a><a href={tg} target="_blank" rel="noopener noreferrer">Telegram ↗</a></div></div></nav>
+<div class="nav-cta"><a class="nav-cta-label" href={tg} target="_blank" rel="noopener noreferrer">Get FRENUGO ↗</a><a class="pink-app" href={tg} target="_blank" rel="noopener noreferrer" aria-label="Open FRENUGO on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>↗</span></a></div><button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button></header>
+<nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden><a href="#earn">Earn ↗</a><a href="#how">How It Works ↗</a><a href={base+'stats/'}>Statistics ↗</a><a href={base+'signals/'}>Signals ↗</a><a href={tg} target="_blank" rel="noopener noreferrer">Get FRENUGO ↗</a></nav>
+<main id="main"><section class="hero" id="top"><div class="hero-type"><h1>Earn</h1><div class="word-window" aria-label="Rewards, cash, money"><div class="word-track" aria-hidden="true">{words.map(w=><div>{w}</div>)}</div></div></div><div class="scene hero-coin coin-one" data-scene="coin" aria-hidden="true"></div><div class="scene hero-coin coin-two" data-scene="coin" aria-hidden="true"></div><div class="hero-bottom"><p>Explore the results. Follow the numbers.<br/><span>Statistics, signals, updates — all in one place.</span></p><div class="store-pair"><a href={base+'stats/'} class="store-button"><span class="store-icon">↗</span><span>Statistics<small>View results</small></span></a><a href={tg} target="_blank" rel="noopener noreferrer" class="store-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>Telegram<small>Join FRENUGO</small></span></a></div></div></section>
+<section class="press" aria-label="Explore FRENUGO"><h2>Take a closer look</h2><div class="press-logos"><a href={base+'stats/'} class="press-axios">RESULTS</a><a href={base+'stats/'} class="press-bloomberg">Statistics</a><a href={tg} target="_blank" rel="noopener noreferrer" class="press-chicago">FREN<span>UGO</span></a><a href={base+'signals/'} class="press-pitch">↗ Signals</a><a href={tg} target="_blank" rel="noopener noreferrer" class="press-yahoo">telegram!</a></div></section>
+<section class="testimonials" aria-label="Explore the project"><div class="review-grid">{[0,1,2,3].map(col=><div class="review-column">{[cards[col],cards[col+4]].map(card=><article class="review"><div class={'avatar avatar-'+card[0]} aria-hidden="true">{card[0]}</div><h3>{card[1]}</h3><p>{card[2]}</p><div class="review-bottom"><span class="review-stars" aria-hidden="true">✦✦✦✦✦</span><a href={col===1?base+'stats/':tg} aria-label={'Explore '+card[1]}>↗</a></div></article>)}</div>)}</div><a class="more-love" href={tg} target="_blank" rel="noopener noreferrer">Explore More</a></section>
+<div class="earn-ticker" aria-hidden="true"><div class="ticker-track">{[0,1].map(()=><span>FRENUGO <i>Results &amp; updates</i> <b>✦</b> Follow the <i>numbers</i> <b>✦</b> Join <i>the channel</i> <b>✦</b> </span>)}</div></div>
+<section class="intro" id="earn"><h2>Earn<br/><span>Rewards on<br/>Everything.</span></h2><div class="scene banknote note-left" data-scene="note" aria-hidden="true"></div><div class="scene banknote note-right" data-scene="note" aria-hidden="true"></div><div class="intro-copy"><p>Explore FRENUGO.</p><p>See the results, statistics and latest updates.</p><p>Follow the numbers.</p></div><h2 class="how-heading" id="how">How It<br/>Works</h2></section>
+<section class="steps" aria-label="How it works"><article class="step"><div class="step-copy"><span class="step-label">Step 01</span><h3>Open<br/>The Channel</h3><p>It's free.</p><div class="step-actions"><a href={tg} target="_blank" rel="noopener noreferrer" aria-label="Open Telegram">↗</a><a href={base+'stats/'} aria-label="Open statistics">▥</a></div></div><div class="step-art scene" data-scene="phone" aria-label="3D phone showing the FRENUGO welcome screen"></div></article>
+<article class="step"><div class="step-copy"><span class="step-label">Step 02</span><h3>See Your Stats</h3><p>Explore the available results,<br/>performance figures and updates<br/>in the public channel.</p></div><div class="step-art scene" data-scene="card" aria-label="3D gold card and miniature gold banks"></div></article>
+<article class="step"><div class="step-copy"><span class="step-label">Step 03</span><h3>Explore Your<br/>Next Step</h3><p>Read about the private channel<br/>and discover the details<br/>behind the signals.</p></div><div class="step-art scene" data-scene="phone-stats" aria-label="3D phone displaying historical results"></div></article></section>
+<div class="coin-ribbon scene" data-scene="ribbon" aria-hidden="true"></div><section class="gold-title"><h2>Start Earning</h2><div class="scene green-word" data-scene="green" aria-label="Sculpted gold word Green"></div></section>
+<section class="warp" id="numbers"><div class="scene warp-scene" data-scene="warp" aria-hidden="true"></div><div class="warp-content"><h2>Explore The Historical Results</h2><div class="counter" data-value="4619">+4,619.00</div><div class="counter-unit">USD PnL*</div></div></section>
+<section class="final-cta"><h2>Get <span class="final-brand">FRENUGO.</span><br/>Get<br class="mobile-break"/> Paid.</h2><p>Join the free channel and take a closer look.</p><div class="final-buttons"><a href={tg} target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>Telegram</span>↗</a><a href={base+'stats/'}><span class="final-stats-icon">▥</span><span>Statistics</span>↗</a></div></section></main>
+<footer class="bridge-footer"><div class="footer-first"><p>FRENUGO — results, statistics and Telegram.<br/>*Historical author-reported PnL. Past performance does not predict future results. Trading involves the risk of loss.</p><div class="social-grid"><a href={tg} target="_blank" rel="noopener noreferrer">Telegram</a><a href={base+'stats/'}>Statistics</a><a href={base+'signals/'}>Signals</a><a href="#how">How It Works</a></div></div><a class="footer-wordmark" href="#top" aria-label="FRENUGO home">FRENUGO</a><div class="footer-last"><span>© {new Date().getFullYear()} FRENUGO</span><div><a href={base+'sitemap.xml'}>Sitemap</a><a href={base+'risks/'}>Risk Disclosure</a><a href={base+'privacy/'}>Privacy Policy</a><a href={base+'terms/'}>Terms of Use</a></div><a class="back-top" href="#top" aria-label="Back to top">↑</a></div></footer>
+<script>import '../scripts/bridge';</script></body></html>
