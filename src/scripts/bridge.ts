@@ -22,7 +22,23 @@ document.querySelectorAll('a').forEach(a=>{[...a.childNodes].filter(n=>n.nodeTyp
 document.querySelectorAll('.review-stars').forEach(el=>{el.innerHTML=Array.from({length:5},()=>'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 1 3.3 7 7.7 1-5.6 5.5 1.4 7.5-6.8-3.7L5.2 22l1.4-7.5L1 9l7.7-1Z" fill="currentColor"/></svg>').join('');});
 if(!reduced){
   const track=document.querySelector<HTMLElement>('.word-track');
-  if(track){let index=0;const count=track.children.length;const cycle=()=>{index++;gsap.to(track,{y:()=>-index*(track.firstElementChild as HTMLElement).getBoundingClientRect().height,duration:.65,ease:'power3.inOut',onComplete:()=>{if(index===count-1){index=0;gsap.set(track,{y:0});}}});};setInterval(cycle,2700);addEventListener('resize',()=>gsap.set(track,{y:-index*(track.firstElementChild as HTMLElement).getBoundingClientRect().height}));}
+  if(track){
+    let index=0;
+    const uniqueWords=track.children.length-1;
+    const rowHeight=()=>(track.firstElementChild as HTMLElement).getBoundingClientRect().height;
+    const settle=()=>{gsap.killTweensOf(track);gsap.set(track,{y:-index*rowHeight()});};
+    const cycle=()=>{
+      if(document.hidden||gsap.isTweening(track))return;
+      const target=index+1;
+      gsap.to(track,{y:-target*rowHeight(),duration:.65,ease:'power3.inOut',onComplete:()=>{
+        index=target%uniqueWords;
+        if(target===uniqueWords)gsap.set(track,{y:0});
+      }});
+    };
+    setInterval(cycle,2700);
+    addEventListener('resize',settle);
+    document.addEventListener('visibilitychange',settle);
+  }
   gsap.from('.hero-type',{opacity:0,y:40,duration:1,ease:'power3.out'});
   document.querySelectorAll<HTMLElement>('.step-copy,.intro-copy,.how-heading,.gold-title h2').forEach(el=>gsap.from(el,{y:60,opacity:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 94%',once:true}}));
   document.querySelectorAll<HTMLElement>('.banknote').forEach((el,i)=>gsap.fromTo(el,{y:45,rotate:i?10:-8},{y:-45,rotate:i?-6:5,ease:'none',scrollTrigger:{trigger:'.intro',start:'top bottom',end:'bottom top',scrub:1}}));
