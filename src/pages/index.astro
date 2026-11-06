@@ -1,20 +1,64 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Mark from '../components/Mark.astro';
-import Button from '../components/Button.astro';
-const base=import.meta.env.BASE_URL;
+const base = import.meta.env.BASE_URL;
 ---
-<Layout>
-<section class="hero"><div class="hero-meta"><span><i></i> Независимый алгоритмический трейдинг</span><span>Ярослав Алексеевич</span></div><div class="hero-stage"><h1 class="hero-title"><span class="line">Рынок не</span><span class="line">прощает</span><span class="line pink">хаос.</span></h1><Mark class="hero-mark"/><div class="orbit-label">Код → риск → сделка</div></div><div class="hero-bottom"><p>Собственная торговая система.<br/>Реальные сделки. Математика риска.</p><Button href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer" data-track="telegram_hero">Мой Telegram</Button><a class="scroll-cue" href="#manifesto"><span>Листай. Здесь всё по делу.</span><span>↓</span></a></div></section>
-<div class="ticker" aria-hidden="true"><div class="ticker-track"><span>Собственный код <b>✳</b> Никакой магии <b>✳</b> Математика риска <b>✳</b> Свой подход <b>✳</b></span><span>Собственный код <b>✳</b> Никакой магии <b>✳</b> Математика риска <b>✳</b> Свой подход <b>✳</b></span></div></div>
-<section id="manifesto" class="manifesto section-pad"><div class="section-intro"><span class="small-label">За системой — человек</span><span>FRENCHUG / Ярослав Алексеевич</span></div><h2 class="word-reveal">Я пишу код.<br/>Он держится<br/>правил.</h2><div class="manifesto-bottom"><span class="asterisk" aria-hidden="true">✳</span><div><p class="lead">Эмоции меняются.<br/>Мой подход — нет.</p><p>Я разрабатываю собственного торгового бота и торгую на проп-фирме. В центре системы — BTC, заранее заданные условия входа и контроль риска.</p><p>В Telegram показываю работу над системой, разбираю сделки и говорю об убытках так же открыто, как о прибыли.</p></div></div></section>
-<section id="approach" class="approach"><div class="approach-pin"><div class="approach-heading"><span class="small-label">Как я торгую</span><h2>Сначала<br/>правила.</h2><div class="step-index" aria-hidden="true"><span class="active">01</span><span>02</span><span>03</span></div></div><div class="approach-scenes">
-<article class="scene scene-code"><div class="scene-art code-art" aria-hidden="true"><div class="code-window"><div class="window-dots"><i></i><i></i><i></i><span>frenchug / system</span></div><code><em>if</em> setup.is_valid:<br/>&nbsp; risk.<b>check</b>()<br/>&nbsp; signal.<b>publish</b>()<br/>&nbsp; trade.<b>execute</b>()</code><div class="code-foot"><span class="status-dot"></span> Решение по правилам</div></div><span class="code-bracket">{ }</span></div><div class="scene-copy"><span>01 / Алгоритм</span><h3>Код вместо<br/>импульса.</h3><p>Система ищет условия входа. Сделка появляется из набора правил, а не из ощущения, что «пора».</p></div></article>
-<article class="scene scene-risk"><div class="scene-art risk-art" aria-hidden="true"><div class="risk-ring"><span>R</span></div><div class="risk-tag">Риск определён<br/>до входа</div></div><div class="scene-copy"><span>02 / Риск</span><h3>Убыток тоже<br/>часть системы.</h3><p>Сначала — стоп и допустимый риск. Размер позиции подчиняется этим ограничениям.</p></div></article>
-<article class="scene scene-trade"><div class="scene-art trade-art" aria-hidden="true"><div class="trade-ticket"><span>План сделки</span><strong>BTC / USDT</strong><div><span>Условия входа</span><b>Определены</b></div><div><span>Стоп-лосс</span><b>Задан</b></div><div><span>Риск</span><b>Ограничен</b></div><small>Схема процесса, не торговый сигнал</small></div><span class="ticket-star">✦</span></div><div class="scene-copy"><span>03 / Сделка</span><h3>План до.<br/>Разбор после.</h3><p>В закрытом канале сигнал публикуется до моего входа. После сделки важен результат исполнения плана.</p></div></article>
-</div></div></section>
-<section class="stats-tease section-pad"><div class="section-intro"><span class="small-label">Результат требует контекста</span><span>Данные, а не обещания</span></div><h2>Цифры.<br/>С пруфами.</h2><div class="stats-tease-bottom"><div class="data-symbol" aria-hidden="true">↗<span>↘</span></div><div><p class="lead">Красивый график ничего не значит без истории сделок.</p><p>Для проверки системы нужны период, комиссии, просадка и полный журнал. Подтверждённая выгрузка пока не опубликована — доходность здесь не нарисована.</p><Button href={`${base}stats/`} kind="dark">О статистике</Button></div></div></section>
-<section class="telegram-section section-pad"><div class="telegram-copy"><span class="small-label">Публичный канал / бесплатно</span><h2>Весь процесс.<br/>Без витрины.</h2><p>Сделки, мысли о рынке и работа над ботом. Сначала посмотри, как я думаю и торгую.</p><Button href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer" data-track="telegram_section">Перейти в канал</Button><a class="handle" href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer">@frenchug</a></div><div class="telegram-art"><div class="paper-plane" aria-hidden="true"><svg viewBox="0 0 200 170"><path d="m4 62 186-57-45 154-46-58-37 35 8-57Z" fill="#fff"/><path d="m70 79 120-74-91 96-37 35Z" fill="#d3d3d3"/><path d="m99 101 91-96-45 154Z" fill="#ffb7cf"/></svg></div><div class="telegram-post post-back"><span>F / Работа над системой</span><strong>Изменить правило —<br/>сначала проверить.</strong><p>Идея → тест → анализ → решение.</p><small>Иллюстрация тем канала</small></div><div class="telegram-post post-front"><span><i></i> FRENCHUG</span><strong>Стоп — это<br/>тоже результат.</strong><p>Смотрю, где система выполнила план.<br/>И где я ей помешал.</p><small>Иллюстрация тем канала</small></div></div></section>
-<section class="signal-tease section-pad"><div><span class="small-label">Закрытый канал / 18+</span><h2>Меньше шума.<br/>Больше плана.</h2></div><div class="signal-tease-bottom"><p>Актив, направление, вход, стоп,<br/>тейк и параметры риска.<br/>До исполнения моей сделки.</p><div class="tease-price"><span>$73 <small>/ 30 дней</small></span><Button href={`${base}signals/`} kind="dark" data-track="signals_home">Подробнее о сигналах</Button></div></div></section>
-<section class="finale"><div class="finale-top"><span>Свой подход начинается с вопросов.</span><span>Увидимся в Telegram.</span></div><a href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer" class="final-link" data-track="telegram_final"><span>Думай.<br/>Проверяй.</span><span class="final-arrow" aria-hidden="true">↗</span></a><div class="finale-bottom"><span>frenchug</span><span>Собственный код. Никакой магии.</span></div></section>
+<Layout title="FRENCHUG — результаты и торговые сигналы" description="FRENCHUG: статистика сделок, результаты и доступ к торговым сигналам в Telegram.">
+<div class="showcase-home">
+  <section class="showcase-hero" id="top">
+    <div class="showcase-hero-inner">
+      <div class="showcase-eyebrow"><span class="sh-dot"></span> FRENCHUG / TRADING RESULTS <span>2026</span></div>
+      <h1 class="showcase-title"><span class="st-line">ТОЛЬКО</span><span class="st-line">ЦИФРЫ<span class="st-period">.</span></span></h1>
+      <div class="hero-coin coin-3d" aria-hidden="true"><div class="coin-face"><span>F</span></div></div>
+      <div class="showcase-hero-foot"><span>РЕЗУЛЬТАТЫ. СИГНАЛЫ. TELEGRAM.</span><a href="#results" class="showcase-scroll" aria-label="К результатам">СКРОЛЛ <span>↓</span></a><a href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer" class="showcase-pill" data-track="telegram_hero">TELEGRAM ↗</a></div>
+    </div>
+  </section>
+
+  <section class="coin-parade" aria-label="Золотые монеты FRENCHUG">
+    <div class="coin-parade-head"><span>FRENCHUG / 001</span><span>НЕ СЛОВА. ЦИФРЫ.</span></div>
+    <div class="coin-row" aria-hidden="true">
+      <div class="coin-3d coin-a"><div class="coin-face"><span>F</span></div></div>
+      <div class="coin-3d coin-b"><div class="coin-face"><span>F</span></div></div>
+      <div class="coin-3d coin-c"><div class="coin-face"><span>F</span></div></div>
+      <div class="coin-3d coin-d"><div class="coin-face"><span>F</span></div></div>
+      <div class="coin-3d coin-e"><div class="coin-face"><span>F</span></div></div>
+    </div>
+    <div class="coin-parade-bottom"><span>РЕЗУЛЬТАТ В ДВИЖЕНИИ</span><span>↓</span></div>
+  </section>
+
+  <section class="results-stage" id="results">
+    <div class="showcase-section-top"><span>01 / РЕЗУЛЬТАТЫ</span><a href={base + 'stats/'}>СТАТИСТИКА ↗</a></div>
+    <div class="results-label">PNL</div>
+    <div class="results-number" aria-label="Исторический PNL плюс 4 619 долларов"><span>+</span>$4,619</div>
+    <div class="result-coin result-coin-one coin-3d" aria-hidden="true"><div class="coin-face"><span>F</span></div></div>
+    <div class="result-coin result-coin-two coin-3d" aria-hidden="true"><div class="coin-face"><span>F</span></div></div>
+    <div class="result-coin result-coin-three coin-3d" aria-hidden="true"><div class="coin-face"><span>F</span></div></div>
+    <div class="results-bottom"><div><span class="metric-label">WIN RATE</span><strong>44<span>%</span></strong></div><div><span class="metric-label">PERFORMANCE</span><strong>+4,619<span>$</span></strong></div></div>
+    <p class="results-disclaimer">Исторические показатели по данным автора, независимо не подтверждены. Прошлые результаты не гарантируют будущую прибыль.</p>
+  </section>
+
+  <section class="gold-stage">
+    <div class="showcase-section-top"><span>02 / FRENCHUG</span><span>NO NOISE</span></div>
+    <div class="gold-type" aria-label="Результат">РЕЗУЛЬТАТ</div>
+    <div class="gold-stage-foot"><span>ВМЕСТО ОБЕЩАНИЙ</span><span>—</span><span>СТАТИСТИКА.</span></div>
+  </section>
+
+  <section class="subscription-stage" id="subscription">
+    <div class="showcase-section-top"><span>03 / ЗАКРЫТЫЙ TELEGRAM</span><span>30 ДНЕЙ ДОСТУПА</span></div>
+    <h2 class="subscription-title">СИГНАЛЫ.</h2>
+    <div class="subscription-price"><span class="dollar">$</span>73</div>
+    <div class="subscription-coins" aria-hidden="true">
+      <div class="coin-3d sub-coin-one"><div class="coin-face"><span>F</span></div></div>
+      <div class="coin-3d sub-coin-two"><div class="coin-face"><span>F</span></div></div>
+      <div class="coin-3d sub-coin-three"><div class="coin-face"><span>F</span></div></div>
+    </div>
+    <div class="subscription-foot"><span>$73 / 30 ДНЕЙ</span><a href={base + 'signals/'} class="showcase-pill showcase-pill-white">ПОДРОБНЕЕ О ПОДПИСКЕ ↗</a></div>
+  </section>
+
+  <section class="white-finale">
+    <div class="showcase-section-top"><span>04 / FRENCHUG</span><span>ПРИСОЕДИНЯЙСЯ</span></div>
+    <div class="finale-content"><h2>СМОТРИ<br/>НА <em>ЦИФРЫ.</em></h2><a href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer" class="finale-arrow-link" aria-label="Перейти в Telegram" data-track="telegram_final">↗</a></div>
+    <div class="finale-foot"><span>TELEGRAM / @FRENCHUG</span><a href="https://t.me/frenchug" target="_blank" rel="noopener noreferrer" data-track="telegram_final_text">ПЕРЕЙТИ В КАНАЛ ↗</a></div>
+    <div class="mega-brand" aria-hidden="true">FRENCHUG</div>
+  </section>
+</div>
 </Layout>
