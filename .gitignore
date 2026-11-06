@@ -7,3 +7,4 @@ dist/
 .openai/
 .render/
 public/__qa.html
+public/visuals/*.png

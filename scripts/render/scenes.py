@@ -50,7 +50,7 @@ def area(name,pos,power,size,color=(1,1,1),size_y=None):
  o.rotation_euler=(Vector((0,0,0))-o.location).to_track_quat('-Z','Y').to_euler()
 def setup(width,height,scale):
  bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False)
- s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.device='CPU';s.cycles.samples=96;s.cycles.use_denoising=False;s.render.resolution_x=width;s.render.resolution_y=height;s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';s.render.image_settings.color_mode='RGBA';s.render.film_transparent=True;s.world.color=(.1,.1,.1);s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.view_settings.exposure=-.35
+ s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.device='CPU';s.cycles.samples=384;s.cycles.use_denoising=False;s.render.resolution_x=width;s.render.resolution_y=height;s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';s.render.image_settings.color_mode='RGBA';s.render.film_transparent=True;s.world.color=(.1,.1,.1);s.view_settings.view_transform='AgX';s.view_settings.look='AgX - Medium High Contrast';s.view_settings.exposure=-.35
  area('Large white softbox',(-3,-4,4),400,3,(1,.88,.55));area('Right warm strip',(4,-2,1),700,3,(1,.83,.49),.55);area('Upper edge',(-1,2,4),1400,3,(1,.95,.76),1);area('Front fill',(0,-5,-2),55,3)
  bpy.ops.object.camera_add(location=(0,-10,0));c=bpy.context.object;c.rotation_euler=(Vector((0,0,0))-c.location).to_track_quat('-Z','Y').to_euler();c.data.type='ORTHO';c.data.ortho_scale=scale;s.camera=c;return s
 def render(name):
@@ -104,7 +104,7 @@ def note():
 
 mode=sys.argv[sys.argv.index('--')+1] if '--' in sys.argv else 'all'
 if mode in ['all','coin']:
- s=setup(256,256,2.55);c=coin();s.cycles.samples=64
+ s=setup(384,384,2.55);s.world.use_nodes=True;s.world.node_tree.nodes.get('Background').inputs['Color'].default_value=(.45,.22,.01,1);s.world.node_tree.nodes.get('Background').inputs['Strength'].default_value=1.2;c=coin();s.cycles.samples=64
  for i in range(32):
   c.rotation_euler=(.1,.10,math.sin(i/32*2*math.pi)*.72);s.render.filepath=os.path.join(TMP,'coin-%02d.png'%i);bpy.ops.render.render(write_still=True)
 if mode in ['all','static']:
