@@ -1,0 +1,10 @@
+---
+const {class: className = ''} = Astro.props;
+---
+<div class:list={['fn-coin', className]} aria-hidden="true">
+  <div class="fn-coin-core">
+    <div class="fn-coin-face fn-coin-front"><div class="fn-coin-inside"><span>F</span><b>FRENUGO</b></div></div>
+    <div class="fn-coin-face fn-coin-back"><div class="fn-coin-inside"><span>F</span><b>FRENUGO</b></div></div>
+    {Array.from({length: 40}).map((_, i) => <i class="fn-coin-rim" style={`--a:${i * 9}deg`}></i>)}
+  </div>
+</div>
