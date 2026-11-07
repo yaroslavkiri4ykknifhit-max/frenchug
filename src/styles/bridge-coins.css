@@ -17,11 +17,11 @@
 
 @keyframes coin-hover {
   0%, 100% {
-    transform: perspective(700px) translate3d(0, 1%, 0) rotate(var(--coin-roll)) rotateY(8deg);
+    transform: translate3d(0, 1%, 0) rotate(var(--coin-roll));
   }
 
   50% {
-    transform: perspective(700px) translate3d(0, -4%, 0) rotate(calc(var(--coin-roll) + 8deg)) rotateY(-12deg);
+    transform: translate3d(0, -4%, 0) rotate(calc(var(--coin-roll) + 8deg));
   }
 }
 
@@ -72,19 +72,19 @@
   width: clamp(76px, var(--size), 200px);
   transform: translate(-50%, -50%) translate(calc(var(--dx) * .55), calc(var(--dy) * .55)) rotate(var(--tilt)) scale(.82);
   opacity: .76;
-  animation: coin-flight var(--duration) linear var(--delay) infinite paused;
+  animation: coin-flight var(--duration) cubic-bezier(.45, .05, .75, .5) var(--delay) infinite paused;
 }
 
 @keyframes coin-flight {
   0% {
-    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(.54);
+    transform: translate(-50%, -50%) translate(0, 0) rotate(0deg) scale(.36);
     opacity: 0;
   }
 
-  24%, 62% { opacity: .88; }
+  23%, 66% { opacity: .94; }
 
   100% {
-    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--tilt)) scale(1.08);
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) rotate(var(--tilt)) scale(1.42);
     opacity: 0;
   }
 }

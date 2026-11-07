@@ -2,9 +2,18 @@
 from pathlib import Path
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[2];out=ROOT/'public/visuals'
-for name in ('coin-front', 'coin-angled'):
-    with Image.open(ROOT/'.render'/(name+'.png')) as image:
-        image.save(ROOT/'src/assets'/(name+'.webp'), quality=93, method=6)
+frames = []
+for i in range(120):
+    with Image.open(ROOT/'.render'/f'coin-turn-{i:03}.png') as image:
+        frames.append(image.convert('RGBA'))
+assets = ROOT/'src/assets'
+frames[0].save(assets/'coin-front.webp', quality=94, method=6)
+# Millisecond timestamps alternate between 16 and 17 ms to retain 60 fps.
+durations = [round((i+1)*1000/60) - round(i*1000/60) for i in range(len(frames))]
+frames[0].save(
+    assets/'coin-spin.webp', save_all=True, append_images=frames[1:],
+    duration=durations, loop=0, quality=74, method=3,
+)
 for p in out.glob('*.png'):
  im=Image.open(p)
  if p.stem=='green':

@@ -2,7 +2,7 @@
 import '../styles/bridge.css';
 import '../styles/bridge-coins.css';
 import coinFront from '../assets/coin-front.webp';
-import coinAngled from '../assets/coin-angled.webp';
+import coinSpin from '../assets/coin-spin.webp';
 import '@fontsource-variable/archivo/standard.css';
 import '@fontsource-variable/archivo/standard-italic.css';
 import '@fontsource/dm-sans/400.css';
@@ -10,14 +10,13 @@ import '@fontsource/dm-sans/500.css';
 const base=import.meta.env.BASE_URL;
 const tg='https://t.me/frenchug';
 const words = ['СИГНАЛ', 'МОМЕНТ', 'ВХОД', 'СЕТАП'];
-const ribbonCoins = [coinFront, coinAngled, coinFront, coinAngled, coinFront];
 const flights = [
-  { image: coinAngled, x: 29, y: 50, dx: -23, dy: -33, size: 14, tilt: -24, duration: 8, delay: -5 },
-  { image: coinFront, x: 70, y: 46, dx: 23, dy: -31, size: 12, tilt: 18, duration: 10, delay: -7 },
-  { image: coinFront, x: 31, y: 65, dx: -22, dy: 23, size: 12, tilt: -17, duration: 10, delay: -4 },
-  { image: coinAngled, x: 68, y: 64, dx: 24, dy: 22, size: 15, tilt: 22, duration: 9, delay: -4 },
-  { image: coinAngled, x: 54, y: 35, dx: 9, dy: -26, size: 8, tilt: 26, duration: 9, delay: -3 },
-  { image: coinFront, x: 47, y: 73, dx: -10, dy: 21, size: 9, tilt: -22, duration: 11, delay: -5 },
+  { x: 29, y: 50, dx: -23, dy: -33, size: 14, tilt: -24, duration: 8, delay: -5 },
+  { x: 70, y: 46, dx: 23, dy: -31, size: 12, tilt: 18, duration: 10, delay: -7 },
+  { x: 31, y: 65, dx: -22, dy: 23, size: 12, tilt: -17, duration: 10, delay: -4 },
+  { x: 68, y: 64, dx: 24, dy: 22, size: 15, tilt: 22, duration: 9, delay: -4 },
+  { x: 54, y: 35, dx: 9, dy: -26, size: 8, tilt: 26, duration: 9, delay: -3 },
+  { x: 47, y: 73, dx: -10, dy: 21, size: 9, tilt: -22, duration: 11, delay: -5 },
 ];
 const cards=[['01','Results','Every published result, in one place. Open the channel and explore the numbers.'],['02','Statistics','A closer look at performance, with the details behind the numbers.'],['03','Updates','Follow the latest updates. The public channel is free to explore.'],['04','Telegram','FRENUGO is on Telegram. Join the channel and stay connected.'],['05','Performance','See the available trading statistics and the context behind them.'],['06','Signals','Explore the private channel and how trading signals are presented.'],['07','The numbers','Historical results are available on the statistics page.'],['08','FRENUGO','Results, updates and statistics. Everything starts with a closer look.']];
 ---
@@ -29,7 +28,7 @@ const cards=[['01','Results','Every published result, in one place. Open the cha
 <div class="nav-item"><button aria-label="More" aria-expanded="false" aria-controls="more-menu"><svg width="24" height="25" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle"><path d="m10 3-4 18M18 3l-4 18M4 9h17M2 16h17" fill="none" stroke="currentColor" stroke-width="3"/></svg></button><div class="nav-drop" id="more-menu"><a href={base+'signals/'}>Signals ↗</a><a href={tg} target="_blank" rel="noopener noreferrer">Telegram ↗</a></div></div></nav>
 <div class="nav-cta"><a class="nav-cta-label" href={tg} target="_blank" rel="noopener noreferrer">Get FRENUGO ↗</a><a class="pink-app" href={tg} target="_blank" rel="noopener noreferrer" aria-label="Open FRENUGO on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>↗</span></a></div><button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button></header>
 <nav id="mobile-menu" class="mobile-menu" aria-label="Mobile navigation" hidden><a href="#earn">Earn ↗</a><a href="#how">How It Works ↗</a><a href={base+'stats/'}>Statistics ↗</a><a href={base+'signals/'}>Signals ↗</a><a href={tg} target="_blank" rel="noopener noreferrer">Get FRENUGO ↗</a></nav>
-<main id="main"><section class="hero" id="top"><div class="hero-type" lang="ru"><h1 aria-label={`Лови ${words.join(", ").toLowerCase()}`}>ЛОВИ</h1><div class="word-window" aria-hidden="true"><div class="word-track">{[...words, words[0]].map(word => <div class:list={[{ "word-descender": word === "ВХОД" }]}>{word}</div>)}</div></div></div><div class="scene hero-coin coin-one" data-coin-motion aria-hidden="true"><img class="coin-image" src={coinFront.src} width={coinFront.width} height={coinFront.height} alt="" decoding="async"/></div><div class="scene hero-coin coin-two" data-coin-motion aria-hidden="true"><img class="coin-image" src={coinAngled.src} width={coinAngled.width} height={coinAngled.height} alt="" decoding="async"/></div><div class="hero-bottom"><p>Explore the results. Follow the numbers.<br/><span>Statistics, signals, updates — all in one place.</span></p><div class="store-pair"><a href={base+'stats/'} class="store-button"><span class="store-icon">↗</span><span>Statistics<small>View results</small></span></a><a href={tg} target="_blank" rel="noopener noreferrer" class="store-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>Telegram<small>Join FRENUGO</small></span></a></div></div></section>
+<main id="main"><section class="hero" id="top"><div class="hero-type" lang="ru"><h1 aria-label={`Лови ${words.join(", ").toLowerCase()}`}>ЛОВИ</h1><div class="word-window" aria-hidden="true"><div class="word-track">{[...words, words[0]].map(word => <div class:list={[{ "word-descender": word === "ВХОД" }]}>{word}</div>)}</div></div></div><div class="scene hero-coin coin-one" data-coin-motion={coinSpin.src} aria-hidden="true"><img class="coin-image" src={coinFront.src} width={coinFront.width} height={coinFront.height} alt="" decoding="async"/></div><div class="scene hero-coin coin-two" data-coin-motion={coinSpin.src} aria-hidden="true"><img class="coin-image" src={coinFront.src} width={coinFront.width} height={coinFront.height} alt="" decoding="async"/></div><div class="hero-bottom"><p>Explore the results. Follow the numbers.<br/><span>Statistics, signals, updates — all in one place.</span></p><div class="store-pair"><a href={base+'stats/'} class="store-button"><span class="store-icon">↗</span><span>Statistics<small>View results</small></span></a><a href={tg} target="_blank" rel="noopener noreferrer" class="store-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>Telegram<small>Join FRENUGO</small></span></a></div></div></section>
 <section class="press" aria-label="Explore FRENUGO"><h2>Take a closer look</h2><div class="press-logos"><a href={base+'stats/'} class="press-axios">RESULTS</a><a href={base+'stats/'} class="press-bloomberg">Statistics</a><a href={tg} target="_blank" rel="noopener noreferrer" class="press-chicago">FREN<span>UGO</span></a><a href={base+'signals/'} class="press-pitch">↗ Signals</a><a href={tg} target="_blank" rel="noopener noreferrer" class="press-yahoo">telegram!</a></div></section>
 <section class="testimonials" aria-label="Explore the project"><div class="review-grid">{[0,1,2,3].map(col=><div class="review-column">{[cards[col],cards[col+4]].map(card=><article class="review"><div class={'avatar avatar-'+card[0]} aria-hidden="true">{card[0]}</div><h3>{card[1]}</h3><p>{card[2]}</p><div class="review-bottom"><span class="review-stars" aria-hidden="true">✦✦✦✦✦</span><a href={col===1?base+'stats/':tg} aria-label={'Explore '+card[1]}>↗</a></div></article>)}</div>)}</div><a class="more-love" href={tg} target="_blank" rel="noopener noreferrer">Explore More</a></section>
 <div class="earn-ticker" aria-hidden="true"><div class="ticker-track">{[0,1].map(()=><span>FRENUGO <i>Results &amp; updates</i> <b>✦</b> Follow the <i>numbers</i> <b>✦</b> Join <i>the channel</i> <b>✦</b> </span>)}</div></div>
@@ -37,18 +36,18 @@ const cards=[['01','Results','Every published result, in one place. Open the cha
 <section class="steps" aria-label="How it works"><article class="step"><div class="step-copy"><span class="step-label">Step 01</span><h3>Download<br/>The App</h3><p>It's free.</p><div class="step-actions"><a href={tg} target="_blank" rel="noopener noreferrer" aria-label="Open Telegram">↗</a><a href={base+'stats/'} aria-label="Open statistics">▥</a></div></div><div class="step-art scene" data-scene="phone" aria-label="3D phone showing the FRENUGO welcome screen"></div></article>
 <article class="step"><div class="step-copy"><span class="step-label">Step 02</span><h3>Link Your Cards</h3><p>Explore the available results,<br/>performance figures and updates<br/>in the public channel.</p></div><div class="step-art scene" data-scene="card" aria-label="3D gold card and miniature gold banks"></div></article>
 <article class="step"><div class="step-copy"><span class="step-label">Step 03</span><h3>Redeem Your<br/>Rewards</h3><p>Read about the private channel<br/>and discover the details<br/>behind the signals.</p></div><div class="step-art scene" data-scene="phone-stats" aria-label="3D phone displaying historical results"></div></article></section>
-<div class="coin-ribbon scene" data-coin-motion aria-hidden="true">
+<div class="coin-ribbon scene" data-coin-motion={coinSpin.src} aria-hidden="true">
   <div class="coin-ribbon-track">
     {[0, 1].map(() => (
       <div class="coin-ribbon-group">
-        {ribbonCoins.map(image => <img class="coin-image" src={image.src} width={image.width} height={image.height} alt="" decoding="async"/>)}
+        {Array.from({length: 5}, () => <img class="coin-image" src={coinFront.src} width={coinFront.width} height={coinFront.height} alt="" decoding="async"/>)}
       </div>
     ))}
   </div>
 </div><section class="gold-title"><h2>Start Earning</h2><div class="scene green-word" data-scene="green" aria-label="Sculpted gold word Green"></div></section>
-<section class="warp" id="numbers"><div class="scene warp-scene" data-coin-motion aria-hidden="true">
-  {flights.map(({image, x, y, dx, dy, size, tilt, duration, delay}) => (
-    <img class="coin-image coin-flight" src={image.src} width={image.width} height={image.height} alt="" loading="lazy" decoding="async"
+<section class="warp" id="numbers"><div class="scene warp-scene" data-coin-motion={coinSpin.src} aria-hidden="true">
+  {flights.map(({x, y, dx, dy, size, tilt, duration, delay}) => (
+    <img class="coin-image coin-flight" src={coinFront.src} width={coinFront.width} height={coinFront.height} alt="" loading="lazy" decoding="async"
       style={`--x:${x}%;--y:${y}%;--dx:${dx}cqw;--dy:${dy}cqh;--size:${size}cqw;--tilt:${tilt}deg;--duration:${duration}s;--delay:${delay}s`}/>
   ))}
 </div><div class="warp-content"><h2>Explore The Historical Results</h2><div class="counter" data-value="4619">+4,619.00</div><div class="counter-unit">USD PnL*</div></div></section>

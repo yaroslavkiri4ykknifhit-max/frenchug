@@ -2,7 +2,7 @@
 All geometry is generated here. No reference-site assets are used.
 """
 import bpy, math, os, sys
-from mathutils import Vector
+from mathutils import Quaternion, Vector
 ROOT=os.path.abspath(os.path.join(os.path.dirname(__file__),'../..'))
 OUT=os.path.join(ROOT,'public/visuals'); TMP=os.path.join(ROOT,'.render')
 os.makedirs(OUT,exist_ok=True)
@@ -37,22 +37,30 @@ def group(name,objects):
  return e
 def coin():
     start = set(bpy.data.objects)
-    edge = material('Deep gold alloy', (.59, .28, .042), 1, .27)
-    rim = material('Polished champagne gold', (.95, .58, .16), 1, .19)
-    face = material('Satin struck gold', (.82, .47, .095), .90, .42)
-    stamp = material('Raised gold hallmark', (.96, .61, .15), .86, .27)
+    edge = material('Deep gold alloy', (.84, .36, .019), 1, .24)
+    rim = material('Polished yellow gold', (1, .59, .055), 1, .16)
+    face = material('Satin struck gold', (.94, .48, .029), .98, .33)
+    stamp = material('Raised gold hallmark', (1, .58, .047), .97, .23)
 
-    bpy.ops.mesh.primitive_cylinder_add(vertices=160, radius=.94, depth=.176, rotation=(math.pi/2, 0, 0))
-    finish(bpy.context.object, edge, .025)
-    bpy.ops.mesh.primitive_cylinder_add(vertices=160, radius=.873, depth=.034, location=loc(0, 0, .081), rotation=(math.pi/2, 0, 0))
-    finish(bpy.context.object, face, .009)
-
-    for radius, width, depth, mat in [(.899, .020, .087, rim), (.839, .006, .099, rim)]:
-        bpy.ops.mesh.primitive_torus_add(
-            major_radius=radius, minor_radius=width, major_segments=160, minor_segments=12,
-            location=loc(0, 0, depth), rotation=(math.pi/2, 0, 0),
+    bpy.ops.mesh.primitive_cylinder_add(vertices=160, radius=.94, depth=.19, rotation=(math.pi/2, 0, 0))
+    finish(bpy.context.object, edge, .028)
+    for side in [-1, 1]:
+        bpy.ops.mesh.primitive_cylinder_add(
+            vertices=160, radius=.873, depth=.034,
+            location=loc(0, 0, side * .089), rotation=(math.pi/2, 0, 0),
         )
-        finish(bpy.context.object, mat)
+        finish(bpy.context.object, face, .009)
+
+        for radius, width, depth in [(.899, .020, .094), (.839, .006, .107)]:
+            bpy.ops.mesh.primitive_torus_add(
+                major_radius=radius, minor_radius=width, major_segments=160, minor_segments=12,
+                location=loc(0, 0, side * depth), rotation=(math.pi/2, 0, 0),
+            )
+            finish(bpy.context.object, rim)
+
+        mark = text('F', 1.17, d=side * .114, font=os.path.join(TMP, 'archivo.ttf'), mat=stamp, extrude=.017, bevel=.008)
+        if side < 0:
+            mark.rotation_euler.z = math.pi
 
     # Fine ridges cut into the circumference of the coin.
     steps = 112 * 4
@@ -69,7 +77,6 @@ def coin():
     bpy.context.collection.objects.link(reed)
     reed.data.materials.append(edge)
 
-    text('F', 1.17, d=.107, font=os.path.join(TMP, 'archivo.ttf'), mat=stamp, extrude=.017, bevel=.008)
     return group('FRENUGO struck gold coin', set(bpy.data.objects)-start)
 def area(name,pos,power,size,color=(1,1,1),size_y=None):
  bpy.ops.object.light_add(type='AREA',location=pos);o=bpy.context.object;o.name=name;o.data.energy=power;o.data.color=color;o.data.shape='RECTANGLE' if size_y else 'DISK';o.data.size=size
@@ -131,26 +138,30 @@ def note():
 
 mode=sys.argv[sys.argv.index('--')+1] if '--' in sys.argv else 'all'
 if mode in ['all', 'coin']:
-    s = setup(640, 640, 2.55)
+    s = setup(400, 400, 2.55)
     s.world.use_nodes = True
     background = s.world.node_tree.nodes.get('Background')
-    background.inputs['Color'].default_value = (.38, .33, .25, 1)
-    background.inputs['Strength'].default_value = .65
+    background.inputs['Color'].default_value = (.48, .38, .24, 1)
+    background.inputs['Strength'].default_value = .9
     for light in [obj for obj in s.objects if obj.type == 'LIGHT']:
         bpy.data.objects.remove(light, do_unlink=True)
-    s.view_settings.exposure = -.2
-    area('Large white softbox', (-3, -4, 4), 400, 3, (1, .88, .55))
-    area('Right warm strip', (4, -2, 1), 300, 3, (1, .83, .49), .55)
-    area('Upper edge', (-1, 2, 4), 1200, 3, (1, .95, .76), 1)
-    area('Long white reflection', (-1.7, -3.8, 2.7), 220, 3.4, (1, .95, .84), 1.6)
-    area('Lower warm reflection', (1.7, -4, -2.8), 68, 2.8, (1, .90, .68), 1.2)
-    area('Broad warm fill', (0, -5, -2), 125, 4, (1, .94, .75))
-    s.cycles.samples = 256
+    s.view_settings.exposure = -.35
+    area('Main gold softbox', (-2.1, -4, 3), 315, 3.4, (1, .92, .73), 2.3)
+    area('Right gold strip', (3.2, -2, 1.5), 420, 3.1, (1, .86, .58), .65)
+    area('Upper edge', (-1, 2, 4), 1250, 3, (1, .95, .76), 1)
+    area('Low warm strip', (1, -3.5, -2.8), 95, 3, (1, .88, .65), 1.15)
+    s.cycles.samples = 24
     s.cycles.use_denoising = False
+    s.cycles.sample_clamp_indirect = 2
+    s.cycles.max_bounces = 4
     c = coin()
-    for name, pose in [('coin-front', (.12, 0, -.20)), ('coin-angled', (-.23, 0, .49))]:
-        c.rotation_euler = pose
-        s.render.filepath = os.path.join(TMP, name+'.png')
+    # Both faces are identical. A half turn loops into the same physical pose.
+    tilt = Quaternion((0, 1, 0), -.14) @ Quaternion((1, 0, 0), .10)
+    c.rotation_mode = 'QUATERNION'
+    frames = 120
+    for i in range(frames):
+        c.rotation_quaternion = tilt @ Quaternion((0, 0, 1), -.12 + math.pi * i / frames)
+        s.render.filepath = os.path.join(TMP, f'coin-turn-{i:03}.png')
         bpy.ops.render.render(write_still=True)
 if mode in ['all','static']:
  setup(500,625,6.3);phone();render('phone-welcome')
