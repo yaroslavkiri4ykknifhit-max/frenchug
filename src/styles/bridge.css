@@ -71,3 +71,13 @@ h2,h3{font-stretch:110%;font-weight:800}.hero h1,.word-track{font-stretch:100%}.
     transform: scaleX(.9);
   }
 }
+
+@media (max-width: 359px) {
+  .gold-wordmark {
+    position: relative;
+    inset: auto;
+    width: 90%;
+    height: 23vw;
+    margin: -1.5vw auto 0;
+  }
+}
