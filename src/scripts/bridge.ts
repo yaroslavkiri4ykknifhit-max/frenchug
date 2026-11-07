@@ -46,5 +46,5 @@ if(!reduced){
   const counter=document.querySelector<HTMLElement>('.counter');
   if(counter){const n={value:0};gsap.to(n,{value:4619,duration:2,ease:'power2.out',scrollTrigger:{trigger:'.warp',start:'top 65%',once:true},onUpdate:()=>counter.textContent='+'+n.value.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})});}
 }
-// Keep layout and links usable even on devices without WebGL.
-import('./bridge-baked').then(({mountBakedScenes})=>mountBakedScenes(reduced)).catch(error=>{console.error('Rendered scene initialization failed',error);});
+// Load the static rendered scenes and pause offscreen coin animations.
+import('./bridge-baked').then(({mountBakedScenes})=>mountBakedScenes()).catch(error=>{console.error('Rendered scene initialization failed',error);});

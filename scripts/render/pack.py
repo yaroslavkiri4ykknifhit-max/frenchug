@@ -2,9 +2,9 @@
 from pathlib import Path
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[2];out=ROOT/'public/visuals'
-atlas=Image.new('RGBA',(3072,1536))
-for i in range(32):atlas.paste(Image.open(ROOT/('.render/coin-%02d.png'%i)),(i%8*384,i//8*384))
-atlas.save(out/'coins.webp',quality=93,method=6)
+for name in ('coin-front', 'coin-angled'):
+    with Image.open(ROOT/'.render'/(name+'.png')) as image:
+        image.save(ROOT/'src/assets'/(name+'.webp'), quality=93, method=6)
 for p in out.glob('*.png'):
  im=Image.open(p)
  if p.stem=='green':

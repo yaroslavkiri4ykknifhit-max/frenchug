@@ -36,14 +36,41 @@ def group(name,objects):
  for o in objects:o.parent=e
  return e
 def coin():
- start=set(bpy.data.objects)
- bpy.ops.mesh.primitive_cylinder_add(vertices=96,radius=.94,depth=.15,rotation=(math.pi/2,0,0));finish(bpy.context.object,FACE,.035)
- for d in [-.095,.095]:
-  bpy.ops.mesh.primitive_torus_add(major_radius=.9,minor_radius=.027,major_segments=96,minor_segments=10,location=loc(0,0,d),rotation=(math.pi/2,0,0));finish(bpy.context.object,PALE)
- text('F',1.18,d=.1,font=os.path.join(TMP,'archivo.ttf'),extrude=.018,bevel=.01)
- # The reverse is also embossed, so the loop remains fully three dimensional.
- back=text('F',1.18,d=-.1,font=os.path.join(TMP,'archivo.ttf'));back.rotation_euler.z=math.pi
- return group('FRENUGO original coin',set(bpy.data.objects)-start)
+    start = set(bpy.data.objects)
+    edge = material('Deep gold alloy', (.59, .28, .042), 1, .27)
+    rim = material('Polished champagne gold', (.95, .58, .16), 1, .19)
+    face = material('Satin struck gold', (.82, .47, .095), .90, .42)
+    stamp = material('Raised gold hallmark', (.96, .61, .15), .86, .27)
+
+    bpy.ops.mesh.primitive_cylinder_add(vertices=160, radius=.94, depth=.176, rotation=(math.pi/2, 0, 0))
+    finish(bpy.context.object, edge, .025)
+    bpy.ops.mesh.primitive_cylinder_add(vertices=160, radius=.873, depth=.034, location=loc(0, 0, .081), rotation=(math.pi/2, 0, 0))
+    finish(bpy.context.object, face, .009)
+
+    for radius, width, depth, mat in [(.899, .020, .087, rim), (.839, .006, .099, rim)]:
+        bpy.ops.mesh.primitive_torus_add(
+            major_radius=radius, minor_radius=width, major_segments=160, minor_segments=12,
+            location=loc(0, 0, depth), rotation=(math.pi/2, 0, 0),
+        )
+        finish(bpy.context.object, mat)
+
+    # Fine ridges cut into the circumference of the coin.
+    steps = 112 * 4
+    vertices = []
+    for depth in [-.056, .056]:
+        for i in range(steps):
+            angle = i / steps * math.tau
+            radius = .949 if i % 4 in (1, 2) else .940
+            vertices.append(loc(radius * math.cos(angle), radius * math.sin(angle), depth))
+    faces = [(i, (i+1) % steps, (i+1) % steps+steps, i+steps) for i in range(steps)]
+    mesh = bpy.data.meshes.new('Reeded gold edge')
+    mesh.from_pydata(vertices, [], faces)
+    reed = bpy.data.objects.new(mesh.name, mesh)
+    bpy.context.collection.objects.link(reed)
+    reed.data.materials.append(edge)
+
+    text('F', 1.17, d=.107, font=os.path.join(TMP, 'archivo.ttf'), mat=stamp, extrude=.017, bevel=.008)
+    return group('FRENUGO struck gold coin', set(bpy.data.objects)-start)
 def area(name,pos,power,size,color=(1,1,1),size_y=None):
  bpy.ops.object.light_add(type='AREA',location=pos);o=bpy.context.object;o.name=name;o.data.energy=power;o.data.color=color;o.data.shape='RECTANGLE' if size_y else 'DISK';o.data.size=size
  if size_y:o.data.size_y=size_y
@@ -103,10 +130,28 @@ def note():
  group('Gold banknote', [o for o in bpy.context.scene.objects if o.type in ['MESH','CURVE']]).rotation_euler=(.1,-.16,-.15)
 
 mode=sys.argv[sys.argv.index('--')+1] if '--' in sys.argv else 'all'
-if mode in ['all','coin']:
- s=setup(384,384,2.55);s.world.use_nodes=True;s.world.node_tree.nodes.get('Background').inputs['Color'].default_value=(.45,.22,.01,1);s.world.node_tree.nodes.get('Background').inputs['Strength'].default_value=1.2;c=coin();s.cycles.samples=64
- for i in range(32):
-  c.rotation_euler=(.1,.10,math.sin(i/32*2*math.pi)*.72);s.render.filepath=os.path.join(TMP,'coin-%02d.png'%i);bpy.ops.render.render(write_still=True)
+if mode in ['all', 'coin']:
+    s = setup(640, 640, 2.55)
+    s.world.use_nodes = True
+    background = s.world.node_tree.nodes.get('Background')
+    background.inputs['Color'].default_value = (.38, .33, .25, 1)
+    background.inputs['Strength'].default_value = .65
+    for light in [obj for obj in s.objects if obj.type == 'LIGHT']:
+        bpy.data.objects.remove(light, do_unlink=True)
+    s.view_settings.exposure = -.2
+    area('Large white softbox', (-3, -4, 4), 400, 3, (1, .88, .55))
+    area('Right warm strip', (4, -2, 1), 300, 3, (1, .83, .49), .55)
+    area('Upper edge', (-1, 2, 4), 1200, 3, (1, .95, .76), 1)
+    area('Long white reflection', (-1.7, -3.8, 2.7), 220, 3.4, (1, .95, .84), 1.6)
+    area('Lower warm reflection', (1.7, -4, -2.8), 68, 2.8, (1, .90, .68), 1.2)
+    area('Broad warm fill', (0, -5, -2), 125, 4, (1, .94, .75))
+    s.cycles.samples = 256
+    s.cycles.use_denoising = False
+    c = coin()
+    for name, pose in [('coin-front', (.12, 0, -.20)), ('coin-angled', (-.23, 0, .49))]:
+        c.rotation_euler = pose
+        s.render.filepath = os.path.join(TMP, name+'.png')
+        bpy.ops.render.render(write_still=True)
 if mode in ['all','static']:
  setup(500,625,6.3);phone();render('phone-welcome')
  setup(500,625,6.3);phone(True);render('phone-stats')
