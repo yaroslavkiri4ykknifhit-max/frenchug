@@ -42,7 +42,7 @@ if(!reduced){
   gsap.from('.hero-type',{opacity:0,y:40,duration:1,ease:'power3.out'});
   document.querySelectorAll<HTMLElement>('.step-copy,.intro-copy,.how-heading,.gold-title h2').forEach(el=>gsap.from(el,{y:60,opacity:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 94%',once:true}}));
   document.querySelectorAll<HTMLElement>('.banknote').forEach((el,i)=>gsap.fromTo(el,{y:45,rotate:i?10:-8},{y:-45,rotate:i?-6:5,ease:'none',scrollTrigger:{trigger:'.intro',start:'top bottom',end:'bottom top',scrub:1}}));
-  gsap.fromTo('.green-word',{rotate:-4,y:35},{rotate:3,y:-20,ease:'none',scrollTrigger:{trigger:'.gold-title',start:'top bottom',end:'bottom top',scrub:1}});
+  gsap.fromTo('.gold-wordmark',{rotate:-4,y:35},{rotate:3,y:-20,ease:'none',scrollTrigger:{trigger:'.gold-title',start:'top bottom',end:'bottom top',scrub:1}});
   const counter=document.querySelector<HTMLElement>('.counter');
   if(counter){const n={value:0};gsap.to(n,{value:4619,duration:2,ease:'power2.out',scrollTrigger:{trigger:'.warp',start:'top 65%',once:true},onUpdate:()=>counter.textContent='+'+n.value.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})});}
 }

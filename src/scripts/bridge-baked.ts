@@ -7,7 +7,7 @@ export function mountBakedScenes() {
     phone: 'phone-welcome.webp',
     'phone-stats': 'phone-stats.webp',
     card: 'card.webp',
-    green: 'green.webp',
+    wordmark: 'frenugo.webp',
   };
 
   document.querySelectorAll<HTMLElement>('[data-scene]').forEach(el => {

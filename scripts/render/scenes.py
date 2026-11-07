@@ -168,4 +168,11 @@ if mode in ['all','static']:
  setup(500,625,6.3);phone(True);render('phone-stats')
  setup(500,625,6.3);card();render('card')
  setup(420,420,3.65);note();render('banknote')
- setup(1000,400,9.5);o=text('Green',3.1,y=-.15,d=0,font=os.path.join(ROOT,'public/fonts/allura.ttf'),extrude=.1,bevel=.085);o.rotation_euler.x+=.08;render('green')
+if mode in ['all', 'static', 'wordmark']:
+    setup(2000, 800, 9.5)
+    wordmark = text(
+        'Frenugo', 3.1, y=-.15, d=0, font=os.path.join(ROOT, 'public/fonts/allura.ttf'),
+        extrude=.1, bevel=.076,
+    )
+    wordmark.rotation_euler.x += .08
+    render('frenugo')
