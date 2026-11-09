@@ -14,7 +14,7 @@ export function mountBakedScenes() {
     const src = staticScenes[el.dataset.scene!];
     if (!src) return;
     const img = document.createElement('img');
-    img.src = base + src + version;
+    img.src = base + src + (src.startsWith('phone-') ? '?v=ru' : version);
     img.alt = '';
     img.decoding = 'async';
     img.loading = el.dataset.scene === 'note' ? 'eager' : 'lazy';

@@ -163,9 +163,10 @@ if mode in ['all', 'coin']:
         c.rotation_quaternion = tilt @ Quaternion((0, 0, 1), -.12 + math.pi * i / frames)
         s.render.filepath = os.path.join(TMP, f'coin-turn-{i:03}.png')
         bpy.ops.render.render(write_still=True)
-if mode in ['all','static']:
+if mode in ['all', 'static', 'phones']:
  setup(500,625,6.3);phone();render('phone-welcome')
  setup(500,625,6.3);phone(True);render('phone-stats')
+if mode in ['all','static']:
  setup(500,625,6.3);card();render('card')
  setup(420,420,3.65);note();render('banknote')
 if mode in ['all', 'static', 'wordmark']:

@@ -12,8 +12,8 @@ document.querySelectorAll('.nav-drop a').forEach(a=>a.addEventListener('click',c
 addEventListener('scroll',()=>nav?.classList.toggle('scrolled',scrollY>100),{passive:true});
 const hamburger=document.querySelector<HTMLButtonElement>('.hamburger');
 const mobileMenu=document.querySelector<HTMLElement>('#mobile-menu');
-function closeMobile(){hamburger?.setAttribute('aria-expanded','false');if(mobileMenu)mobileMenu.hidden=true;}
-hamburger?.addEventListener('click',()=>{const open=hamburger.getAttribute('aria-expanded')==='true';hamburger.setAttribute('aria-expanded',String(!open));if(mobileMenu)mobileMenu.hidden=open;});
+function closeMobile(){hamburger?.setAttribute('aria-expanded','false');hamburger?.setAttribute('aria-label','Открыть меню');if(mobileMenu)mobileMenu.hidden=true;}
+hamburger?.addEventListener('click',()=>{const open=hamburger.getAttribute('aria-expanded')==='true';hamburger.setAttribute('aria-expanded',String(!open));hamburger.setAttribute('aria-label',open?'Открыть меню':'Закрыть меню');if(mobileMenu)mobileMenu.hidden=open;});
 mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMobile));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobile();});
 // Explicit vector icons avoid missing glyphs on platforms with limited system fonts.
@@ -44,7 +44,11 @@ if(!reduced){
   document.querySelectorAll<HTMLElement>('.banknote').forEach((el,i)=>gsap.fromTo(el,{y:45,rotate:i?10:-8},{y:-45,rotate:i?-6:5,ease:'none',scrollTrigger:{trigger:'.intro',start:'top bottom',end:'bottom top',scrub:1}}));
   gsap.fromTo('.gold-wordmark',{rotate:-4,y:35},{rotate:3,y:-20,ease:'none',scrollTrigger:{trigger:'.gold-title',start:'top bottom',end:'bottom top',scrub:1}});
   const counter=document.querySelector<HTMLElement>('.counter');
-  if(counter){const n={value:0};gsap.to(n,{value:4619,duration:2,ease:'power2.out',scrollTrigger:{trigger:'.warp',start:'top 65%',once:true},onUpdate:()=>counter.textContent='+'+n.value.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})});}
+  if(counter){
+    const n={value:0};
+    const formatPnl=new Intl.NumberFormat('ru-RU',{signDisplay:'always',minimumFractionDigits:2,maximumFractionDigits:2});
+    gsap.to(n,{value:Number(counter.dataset.value),duration:2,ease:'power2.out',scrollTrigger:{trigger:'.warp',start:'top 65%',once:true},onUpdate:()=>counter.textContent=formatPnl.format(n.value)});
+  }
 }
 // Load the static rendered scenes and pause offscreen coin animations.
 import('./bridge-baked').then(({mountBakedScenes})=>mountBakedScenes()).catch(error=>{console.error('Rendered scene initialization failed',error);});
