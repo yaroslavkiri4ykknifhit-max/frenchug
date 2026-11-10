@@ -4,6 +4,7 @@ import '../styles/bridge.css';
 import '../styles/bridge-coins.css';
 import coinFront from '../assets/coin-front.webp';
 import coinSpin from '../assets/coin-spin.webp';
+import TradeScreenshot from '../components/TradeScreenshot.astro';
 import '@fontsource-variable/archivo/standard.css';
 import '@fontsource-variable/archivo/standard-italic.css';
 import '@fontsource/dm-sans/400.css';
@@ -59,30 +60,18 @@ const cards = [
     </div>
   </article>
 
-  <article class="step">
+  <article class="step" id="open-trade">
     <div class="step-copy">
       <span class="step-label">Шаг 02</span>
       <h3>Открыть<br/>сделку</h3>
       <p>Сверь условия сигнала. Если решишь войти,<br/>укажи на бирже размер позиции, стоп и тейк.</p>
     </div>
-    <div class="step-art scene step-art--order" role="img" aria-label="Пример ордера на покупку BTC/USDT. Вход 90 000, стоп 89 100, тейк 91 800.">
+    <div class="step-art step-art--order">
       <img class="rendered-scene" src={base+'visuals/card.webp'} width="500" height="625" loading="lazy" decoding="async" alt=""/>
-      <div class="step-ticket" aria-hidden="true">
-        <div class="step-ticket-header">
-          <div><small>Пример ордера</small><strong>BTC / USDT</strong></div>
-          <span>Покупка</span>
-        </div>
-        <svg class="step-ticket-chart" viewBox="0 0 320 82" fill="none">
-          <path d="M0 18H320M0 42H320M0 66H320" stroke="#45404a" stroke-dasharray="4 4"/>
-          <path d="M24 47v27m40-35v29m40-22v28m40-46v36m40-47v32m40-24v36m40-50v37m40-44v29" stroke="#edc65c" stroke-width="2"/>
-          <path d="M18 54h12v13H18zm40-8h12v14H58zm80-10h12v19h-12zm40-12h12v17h-12zm80-7h12v18h-12zm40-8h12v15h-12z" fill="#edc65c"/>
-          <path d="M98 52h12v15H98zm120-21h12v16h-12z" fill="#fac5d0"/>
-        </svg>
-        <div class="step-ticket-levels">
-          <div><small>Вход</small><strong>90 000</strong></div>
-          <div><small>Стоп</small><strong>89 100</strong></div>
-          <div><small>Тейк</small><strong>91 800</strong></div>
-        </div>
+      <div class="step-order-shot">
+        <TradeScreenshot file="order-levels" width={1197} height={510}
+          alt="Свечной график с открытой позицией, текущим PnL, стоп-лоссом и тейк-профитом."
+          caption="Ордер со стопом и тейком" />
       </div>
     </div>
   </article>
@@ -93,8 +82,12 @@ const cards = [
       <h3>Получить<br/>прибыль</h3>
       <p>При выходе по тейку фиксируешь прибыль.<br/>Сделка может закрыться и в минус.</p>
     </div>
-    <div class="step-art scene step-art--phone">
-      <img class="rendered-scene" src={base+'visuals/phone-result.webp'} width="720" height="900" loading="lazy" decoding="async" alt="Условный итог при выходе по тейку 91 800 составляет две единицы риска до комиссий."/>
+    <div class="step-art step-art--result">
+      <div class="step-result-shot">
+        <TradeScreenshot file="okx-closed-trade" width={684} height={1058}
+          alt="Карточка OKX с результатом закрытой длинной позиции по TONUSDT."
+          caption="Закрытая сделка на OKX" />
+      </div>
     </div>
   </article>
 </section>
