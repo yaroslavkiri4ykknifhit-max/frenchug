@@ -89,10 +89,10 @@ def setup(width,height,scale):
  bpy.ops.object.camera_add(location=(0,-10,0));c=bpy.context.object;c.rotation_euler=(Vector((0,0,0))-c.location).to_track_quat('-Z','Y').to_euler();c.data.type='ORTHO';c.data.ortho_scale=scale;s.camera=c;return s
 def render(name):
  s=bpy.context.scene;s.render.filepath=os.path.join(OUT,name+'.png');bpy.ops.render.render(write_still=True)
-def phone(stats=False):
+def phone(screen):
  box('Metal rim',2.34,4.85,.22,mat=CHROME,bevel=.24);box('Black glass',2.29,4.79,.23,d=.04,mat=BLACK,bevel=.23)
  # Authored screen texture, applied to a real glass-fronted 3D phone.
- m=bpy.data.materials.new('Original FRENUGO display');m.use_nodes=True;nodes=m.node_tree.nodes;nodes.clear();out=nodes.new('ShaderNodeOutputMaterial');em=nodes.new('ShaderNodeEmission');tex=nodes.new('ShaderNodeTexImage');tex.image=bpy.data.images.load(os.path.join(TMP,'phone-'+('stats' if stats else 'welcome')+'.png'));m.node_tree.links.new(tex.outputs['Color'],em.inputs['Color']);em.inputs['Strength'].default_value=.8;m.node_tree.links.new(em.outputs[0],out.inputs[0])
+ m=bpy.data.materials.new('Original FRENUGO display');m.use_nodes=True;nodes=m.node_tree.nodes;nodes.clear();out=nodes.new('ShaderNodeOutputMaterial');em=nodes.new('ShaderNodeEmission');tex=nodes.new('ShaderNodeTexImage');tex.image=bpy.data.images.load(os.path.join(TMP,'phone-'+screen+'.png'));m.node_tree.links.new(tex.outputs['Color'],em.inputs['Color']);em.inputs['Strength'].default_value=.8;m.node_tree.links.new(em.outputs[0],out.inputs[0])
  # A beveled rectangle keeps the physical screen corners rounded.
  o=box('Screen',2.18,4.61,.025,d=.168,mat=m,bevel=.19)
  # Cube UVs need front mapping rather than six packed faces.
@@ -164,8 +164,10 @@ if mode in ['all', 'coin']:
         s.render.filepath = os.path.join(TMP, f'coin-turn-{i:03}.png')
         bpy.ops.render.render(write_still=True)
 if mode in ['all', 'static', 'phones']:
- setup(500,625,6.3);phone();render('phone-welcome')
- setup(500,625,6.3);phone(True);render('phone-stats')
+    for screen in ('signal', 'result'):
+        setup(720, 900, 6.0)
+        phone(screen)
+        render('phone-' + screen)
 if mode in ['all','static']:
  setup(500,625,6.3);card();render('card')
  setup(420,420,3.65);note();render('banknote')

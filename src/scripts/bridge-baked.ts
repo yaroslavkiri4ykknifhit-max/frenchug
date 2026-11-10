@@ -4,9 +4,6 @@ const version = '?v=original-3d-20261106b';
 export function mountBakedScenes() {
   const staticScenes: Record<string, string> = {
     note: 'banknote.webp',
-    phone: 'phone-welcome.webp',
-    'phone-stats': 'phone-stats.webp',
-    card: 'card.webp',
     wordmark: 'frenugo.webp',
   };
 
@@ -14,7 +11,7 @@ export function mountBakedScenes() {
     const src = staticScenes[el.dataset.scene!];
     if (!src) return;
     const img = document.createElement('img');
-    img.src = base + src + (src.startsWith('phone-') ? '?v=ru' : version);
+    img.src = base + src + version;
     img.alt = '';
     img.decoding = 'async';
     img.loading = el.dataset.scene === 'note' ? 'eager' : 'lazy';

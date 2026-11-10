@@ -43,9 +43,61 @@ const cards = [
 <section class="testimonials" aria-label="Разделы проекта"><div class="review-grid">{[0,1,2,3].map(col=><div class="review-column">{[cards[col],cards[col+4]].map(card=><article class="review"><div class={'avatar avatar-'+card[0]} aria-hidden="true">{card[0]}</div><h3>{card[1]}</h3><p>{card[2]}</p><div class="review-bottom"><span class="review-stars" aria-hidden="true">✦✦✦✦✦</span><a href={col===1?base+'stats/':tg} aria-label={'Подробнее: '+card[1]}>↗</a></div></article>)}</div>)}</div><a class="more-love" href={tg} target="_blank" rel="noopener noreferrer">Заглянуть в канал</a></section>
 <div class="earn-ticker" aria-hidden="true"><div class="ticker-track">{[0,1].map(()=><span>FRENUGO <i>Результаты и обновления</i> <b>✦</b> Следи за <i>цифрами</i> <b>✦</b> Заходи <i>в канал</i> <b>✦</b> </span>)}</div></div>
 <section class="intro" id="earn"><h2>Трейдинг<br/><span>по плану.<br/>В цифрах.</span></h2><div class="scene banknote note-left" data-scene="note" aria-hidden="true"></div><div class="scene banknote note-right" data-scene="note" aria-hidden="true"></div><div class="intro-copy"><p>FRENUGO — проект о торговле криптовалютами.</p><p>Результаты, статистика и свежие публикации.</p><p>Заходи в открытый канал.</p></div><h2 class="how-heading" id="how">Как это<br/>работает</h2></section>
-<section class="steps" aria-label="Как это работает"><article class="step"><div class="step-copy"><span class="step-label">Шаг 01</span><h3>Открой<br/>Telegram</h3><p>Открытый канал бесплатный.</p><div class="step-actions"><a href={tg} target="_blank" rel="noopener noreferrer" aria-label="Открыть Telegram">↗</a><a href={base+'stats/'} aria-label="Открыть статистику">▥</a></div></div><div class="step-art scene" data-scene="phone" aria-label="Телефон с приветственным экраном FRENUGO"></div></article>
-<article class="step"><div class="step-copy"><span class="step-label">Шаг 02</span><h3>Изучи<br/>результаты</h3><p>В открытом канале — результаты,<br/>статистика и обновления.</p></div><div class="step-art scene" data-scene="card" aria-label="Золотая карта и миниатюрные здания банков"></div></article>
-<article class="step"><div class="step-copy"><span class="step-label">Шаг 03</span><h3>Разберись<br/>в сигналах</h3><p>Узнай, как устроен закрытый канал<br/>и что входит в торговый сигнал.</p></div><div class="step-art scene" data-scene="phone-stats" aria-label="Телефон с результатами прошлых сделок"></div></article></section>
+<section class="steps" aria-label="Как это работает">
+  <article class="step">
+    <div class="step-copy">
+      <span class="step-label">Шаг 01</span>
+      <h3>Получить<br/>сигнал от бота</h3>
+      <p>Бот заранее присылает актив, направление<br/>и уровни входа, стопа и тейка.</p>
+      <div class="step-actions">
+        <a href={tg} target="_blank" rel="noopener noreferrer" aria-label="Открыть Telegram">↗</a>
+        <a href={base+'stats/'} aria-label="Открыть статистику">▥</a>
+      </div>
+    </div>
+    <div class="step-art scene step-art--phone">
+      <img class="rendered-scene" src={base+'visuals/phone-signal.webp'} width="720" height="900" loading="lazy" decoding="async" alt="Условный сигнал от бота на покупку BTC/USDT. Вход 90 000, стоп 89 100, тейк 91 800."/>
+    </div>
+  </article>
+
+  <article class="step">
+    <div class="step-copy">
+      <span class="step-label">Шаг 02</span>
+      <h3>Открыть<br/>сделку</h3>
+      <p>Сверь условия сигнала. Если решишь войти,<br/>укажи на бирже размер позиции, стоп и тейк.</p>
+    </div>
+    <div class="step-art scene step-art--order" role="img" aria-label="Пример ордера на покупку BTC/USDT. Вход 90 000, стоп 89 100, тейк 91 800.">
+      <img class="rendered-scene" src={base+'visuals/card.webp'} width="500" height="625" loading="lazy" decoding="async" alt=""/>
+      <div class="step-ticket" aria-hidden="true">
+        <div class="step-ticket-header">
+          <div><small>Пример ордера</small><strong>BTC / USDT</strong></div>
+          <span>Покупка</span>
+        </div>
+        <svg class="step-ticket-chart" viewBox="0 0 320 82" fill="none">
+          <path d="M0 18H320M0 42H320M0 66H320" stroke="#45404a" stroke-dasharray="4 4"/>
+          <path d="M24 47v27m40-35v29m40-22v28m40-46v36m40-47v32m40-24v36m40-50v37m40-44v29" stroke="#edc65c" stroke-width="2"/>
+          <path d="M18 54h12v13H18zm40-8h12v14H58zm80-10h12v19h-12zm40-12h12v17h-12zm80-7h12v18h-12zm40-8h12v15h-12z" fill="#edc65c"/>
+          <path d="M98 52h12v15H98zm120-21h12v16h-12z" fill="#fac5d0"/>
+        </svg>
+        <div class="step-ticket-levels">
+          <div><small>Вход</small><strong>90 000</strong></div>
+          <div><small>Стоп</small><strong>89 100</strong></div>
+          <div><small>Тейк</small><strong>91 800</strong></div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="step">
+    <div class="step-copy">
+      <span class="step-label">Шаг 03</span>
+      <h3>Получить<br/>прибыль</h3>
+      <p>При выходе по тейку фиксируешь прибыль.<br/>Сделка может закрыться и в минус.</p>
+    </div>
+    <div class="step-art scene step-art--phone">
+      <img class="rendered-scene" src={base+'visuals/phone-result.webp'} width="720" height="900" loading="lazy" decoding="async" alt="Условный итог при выходе по тейку 91 800 составляет две единицы риска до комиссий."/>
+    </div>
+  </article>
+</section>
 <div class="coin-ribbon scene" data-coin-motion={coinSpin.src} aria-hidden="true">
   <div class="coin-ribbon-track">
     {[0, 1].map(() => (

@@ -12,7 +12,6 @@ fonts = (
     ('archivo', 'node_modules/@fontsource-variable/archivo/files/archivo-latin-wght-italic.woff2', 850),
     ('dm', 'node_modules/@fontsource/dm-sans/files/dm-sans-latin-500-normal.woff', 500),
     ('inter', 'src/assets/inter-cyrillic.woff2', 500),
-    ('inter-tight', 'src/assets/inter-tight-cyrillic-italic.woff2', 850),
 )
 for name, source, weight in fonts:
     font = TTFont(ROOT / source)
@@ -21,7 +20,7 @@ for name, source, weight in fonts:
     font.flavor = None
     font.save(TMP / (name + '.ttf'))
 
-for stats in (False, True):
+for screen in ('signal', 'result'):
     image = Image.new('RGB', (600, 1200), '#030303')
     draw = ImageDraw.Draw(image)
 
@@ -29,28 +28,37 @@ for stats in (False, True):
         typeface = ImageFont.truetype(str(TMP / (font + '.ttf')), size)
         draw.text((x, y), text, font=typeface, fill=color, anchor=anchor)
 
+    def levels(rows, start):
+        draw.rounded_rectangle((36, start, 564, start + len(rows) * 100), radius=28, fill='#17151a')
+        for i, (name, value, color) in enumerate(rows):
+            y = start + i * 100
+            if i:
+                draw.line((65, y, 535, y), fill='#343036', width=2)
+            label(name, 70, y + 32, 33, '#e9e3e6')
+            label(value, 530, y + 30, 41, color, 'archivo', 'rt')
+
     label('9:00', 30, 25, 22, font='dm')
     draw.rounded_rectangle((488, 27, 540, 42), radius=3, outline='white', width=2)
     draw.rectangle((493, 31, 534, 38), fill='white')
     draw.rectangle((541, 31, 545, 38), fill='white')
-    if stats:
-        label('4 619', 300, 175, 96, font='archivo', anchor='mt')
-        label('Итог прошлых сделок', 300, 280, 20, '#aaaaaa', anchor='mt')
-        label('44%', 300, 425, 96, '#ffd54b', 'archivo', 'mt')
-        label('ДОЛЯ ПРИБЫЛЬНЫХ СДЕЛОК', 300, 540, 20, '#aaaaaa', anchor='mt')
-        label('РЕЗУЛЬТАТЫ', 35, 660, 20, '#999999')
-        label('FRENUGO', 35, 720, 26, font='dm')
-        label('Исторические данные автора', 35, 775, 19, '#888888')
-        draw.line((35, 840, 565, 840), fill='#333333', width=2)
-        draw.rounded_rectangle((35, 1015, 565, 1120), radius=20, fill='#dfbb43')
-        label('Смотреть результаты', 300, 1050, 26, 'black', 'inter-tight', 'mt')
+    label('FRENUGO', 300, 132, 50, font='archivo', anchor='mt')
+    if screen == 'signal':
+        draw.rounded_rectangle((92, 238, 508, 316), radius=39, fill='#fac5d0')
+        label('СИГНАЛ ОТ БОТА', 300, 260, 33, '#191016', anchor='mt')
+        label('BTC / USDT', 300, 385, 75, font='archivo', anchor='mt')
+        label('ПОКУПКА', 300, 483, 34, '#fac5d0', anchor='mt')
+        levels([('Вход', '90 000', 'white'), ('Стоп', '89 100', '#fac5d0'), ('Тейк', '91 800', '#f4ce62')], 575)
+        label('Условный пример', 300, 990, 31, '#c4b7c0', anchor='mt')
     else:
-        label('FRENUGO', 300, 130, 52, font='archivo', anchor='mt')
-        for text, y in (('Результаты', 300), ('Статистика', 380)):
-            label(text, 300, y, 68, '#fac5d0', 'inter-tight', 'mt')
-        label('Telegram', 300, 460, 68, '#fac5d0', 'archivo', 'mt')
-        label('Загляни в канал', 300, 620, 27, anchor='mt')
-        label('Обновления и данные', 300, 680, 22, '#999999', anchor='mt')
-        draw.rounded_rectangle((35, 1015, 565, 1120), radius=20, fill='#fac5d0')
-        label('Открыть канал', 300, 1050, 26, 'black', 'inter-tight', 'mt')
-    image.save(TMP / ('phone-' + ('stats' if stats else 'welcome') + '.png'))
+        label('ПРИМЕР ИТОГА', 300, 246, 34, '#fac5d0', anchor='mt')
+        label('+2R', 300, 332, 130, '#f4ce62', 'archivo', 'mt')
+        label('При выходе по тейку', 300, 493, 33, '#e9e3e6', anchor='mt')
+        for y in (602, 658, 714):
+            draw.line((59, y, 541, y), fill='#342b1a', width=2)
+        points = [(60, 723), (133, 696), (198, 710), (265, 653), (330, 675), (397, 609), (450, 626), (533, 575)]
+        draw.polygon([*points, (533, 750), (60, 750)], fill='#2c2010')
+        draw.line(points, fill='#f4ce62', width=9, joint='curve')
+        draw.ellipse((522, 564, 544, 586), fill='#f4ce62')
+        levels([('Вход', '90 000', 'white'), ('Выход', '91 800', '#f4ce62')], 808)
+        label('До комиссий', 300, 1060, 31, '#c4b7c0', anchor='mt')
+    image.save(TMP / ('phone-' + screen + '.png'))
