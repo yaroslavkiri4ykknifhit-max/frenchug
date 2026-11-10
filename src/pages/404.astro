@@ -1,5 +1,24 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import '../styles/cyrillic.css';
+import '../styles/global.css';
 import Button from '../components/Button.astro';
+const base = import.meta.env.BASE_URL;
 ---
-<Layout title="Страница не найдена — FRENUGO" noindex><section class="not-found"><span class="small-label">404 / Не тот маршрут</span><h1 style="margin-top:30px">Вернёмся<br/>к плану.</h1><p>Этой страницы нет. Главная — на один клик ближе.</p><Button href={import.meta.env.BASE_URL}>На главную</Button></section></Layout>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Страница не найдена — FRENUGO</title>
+    <link rel="icon" href={base + 'favicon.svg'} />
+  </head>
+  <body>
+    <main class="not-found">
+      <span class="small-label">FRENUGO / 404</span>
+      <h1>Страница<br/>не найдена.</h1>
+      <p>Результаты, графики и информация о сигналах теперь на главной.</p>
+      <Button href={base}>На главную</Button>
+    </main>
+  </body>
+</html>

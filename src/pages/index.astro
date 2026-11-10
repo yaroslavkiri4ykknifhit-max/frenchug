@@ -21,27 +21,38 @@ const flights = [
   { x: 47, y: 73, dx: -10, dy: 21, size: 9, tilt: -22, duration: 11, delay: -5 },
 ];
 const cards = [
-  ['01', 'Результаты', 'Смотри опубликованные результаты и данные по сделкам.'],
-  ['02', 'Статистика', 'Какие данные нужны, чтобы оценить торговые результаты.'],
-  ['03', 'Обновления', 'Свежие публикации в открытом Telegram-канале.'],
-  ['04', 'Telegram', 'Подпишись на FRENUGO и следи за новыми постами.'],
-  ['05', 'Торговые данные', 'Смотри на результаты вместе с периодом и риском.'],
-  ['06', 'Сигналы', 'Как устроен закрытый канал и что указано в сигнале.'],
-  ['07', 'Разбор цифр', 'На странице статистики объясняем, как читать показатели.'],
-  ['08', 'FRENUGO', 'Сделки, статистика и обновления проекта.'],
+  ['01', 'Результаты', 'Смотри итог прошлых сделок.', '#numbers'],
+  ['02', 'Статистика', 'Посмотри примеры графиков с торговыми уровнями.', '#trade-gallery-title'],
+  ['03', 'Обновления', 'Свежие публикации в открытом Telegram-канале.', tg],
+  ['04', 'Telegram', 'Подпишись на FRENUGO и следи за новыми постами.', tg],
+  ['05', 'Торговые данные', 'Смотри на результаты вместе с периодом и риском.', '#numbers'],
+  ['06', 'Сигналы', 'Что приходит в сигнале и как открыть сделку.', '#how'],
+  ['07', 'Разбор цифр', 'Где на графиках отмечены вход, стоп и тейк.', '#trade-gallery-title'],
+  ['08', 'FRENUGO', 'Сделки, статистика и обновления проекта.', '#earn'],
+];
+
+const chartColumns = [
+  [
+    { file: 'position-range', width: 1280, height: 1068, caption: 'Зоны риска и цели', alt: 'Свечной график с серой зоной риска, синей зоной цели и стрелками на свечах.' },
+    { file: 'chart-levels', width: 1280, height: 617, caption: 'Уровни на графике', alt: 'Свечной график с горизонтальными уровнями и значениями в долларах справа.' },
+  ],
+  [
+    { file: 'entry-exit', width: 828, height: 528, caption: 'Отметки покупки и продажи', alt: 'Тёмный свечной график с зелёной отметкой B и розовой отметкой S.' },
+    { file: 'supertrend', width: 825, height: 577, caption: 'График с SuperTrend', alt: 'Свечной график с индикатором SuperTrend и отметками уровней цены.' },
+  ],
 ];
 ---
 <!doctype html><html lang="ru"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>FRENUGO — торговые сигналы и статистика</title><meta name="description" content="Торговые сигналы, статистика и результаты прошлых сделок FRENUGO. Открытый канал в Telegram."/><meta name="theme-color" content="#050505"/><link rel="icon" href={base+'favicon.svg'}/><link rel="canonical" href={new URL(base,Astro.site)}/><meta property="og:title" content="FRENUGO — торговые сигналы и статистика"/><meta property="og:locale" content="ru_RU"/></head>
 <body data-build="bridge-fidelity-20261106-2"><a class="skip-link" href="#main">К содержанию</a><div class="grain" aria-hidden="true"></div>
 <header class="bridge-nav"><a class="brand" href="#top" aria-label="FRENUGO — главная">FRENUGO</a><nav class="icon-nav" aria-label="Основная навигация">
 <div class="nav-item"><button aria-label="О проекте" aria-expanded="false" aria-controls="earn-menu"><svg width="24" height="26" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button><div class="nav-drop" id="earn-menu"><a href="#earn">О проекте ↗</a></div></div>
-<div class="nav-item"><button aria-label="Как это работает" aria-expanded="false" aria-controls="how-menu"><svg width="23" height="26" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle"><path d="m13 1-8 13h6l-1 9L20 9h-7z" fill="currentColor"/></svg></button><div class="nav-drop" id="how-menu"><a href="#how">Как это работает ↗</a><a href={base+'stats/'}>Статистика ↗</a></div></div>
-<div class="nav-item"><button aria-label="Разделы" aria-expanded="false" aria-controls="more-menu"><svg width="24" height="25" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle"><path d="m10 3-4 18M18 3l-4 18M4 9h17M2 16h17" fill="none" stroke="currentColor" stroke-width="3"/></svg></button><div class="nav-drop" id="more-menu"><a href={base+'signals/'}>Сигналы ↗</a><a href={tg} target="_blank" rel="noopener noreferrer">Telegram ↗</a></div></div></nav>
+<div class="nav-item"><button aria-label="Как это работает" aria-expanded="false" aria-controls="how-menu"><svg width="23" height="26" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle"><path d="m13 1-8 13h6l-1 9L20 9h-7z" fill="currentColor"/></svg></button><div class="nav-drop" id="how-menu"><a href="#how">Как это работает ↗</a></div></div>
+<div class="nav-item"><button aria-label="Результаты" aria-expanded="false" aria-controls="more-menu"><svg width="24" height="25" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:middle"><path d="m10 3-4 18M18 3l-4 18M4 9h17M2 16h17" fill="none" stroke="currentColor" stroke-width="3"/></svg></button><div class="nav-drop" id="more-menu"><a href="#numbers">Результаты ↗</a><a href="#trade-gallery-title">Примеры графиков ↗</a></div></div></nav>
 <div class="nav-cta"><a class="nav-cta-label" href={tg} target="_blank" rel="noopener noreferrer">В Telegram ↗</a><a class="pink-app" href={tg} target="_blank" rel="noopener noreferrer" aria-label="Открыть FRENUGO в Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>↗</span></a></div><button class="hamburger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button></header>
-<nav id="mobile-menu" class="mobile-menu" aria-label="Мобильная навигация" hidden><a href="#earn">О проекте ↗</a><a href="#how">Как это работает ↗</a><a href={base+'stats/'}>Статистика ↗</a><a href={base+'signals/'}>Сигналы ↗</a><a href={tg} target="_blank" rel="noopener noreferrer">В Telegram ↗</a></nav>
-<main id="main"><section class="hero" id="top"><div class="hero-type" lang="ru"><h1 aria-label={`Лови ${words.join(", ").toLowerCase()}`}>ЛОВИ</h1><div class="word-window" aria-hidden="true"><div class="word-track">{[...words, words[0]].map(word => <div class:list={[{ "word-descender": word === "ВХОД" }]}>{word}</div>)}</div></div></div><div class="scene hero-coin coin-one" data-coin-motion={coinSpin.src} aria-hidden="true"><img class="coin-image" src={coinFront.src} width={coinFront.width} height={coinFront.height} alt="" decoding="async"/></div><div class="scene hero-coin coin-two" data-coin-motion={coinSpin.src} aria-hidden="true"><img class="coin-image" src={coinFront.src} width={coinFront.width} height={coinFront.height} alt="" decoding="async"/></div><div class="hero-bottom"><p>Не нужно сидеть у графиков весь день.<br/><span>До 3 сигналов в день. О входе — заранее.</span></p><div class="store-pair"><a href={base+'stats/'} class="store-button"><span class="store-icon">↗</span><span>Статистика<small>Посмотреть данные</small></span></a><a href={tg} target="_blank" rel="noopener noreferrer" class="store-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>Telegram<small>Перейти в канал</small></span></a></div></div></section>
-<section class="press" aria-label="О проекте FRENUGO"><h2>Что внутри</h2><div class="press-logos"><a href={base+'stats/'} class="press-axios">ИТОГИ</a><a href={base+'stats/'} class="press-bloomberg">Статистика</a><a href={tg} target="_blank" rel="noopener noreferrer" class="press-chicago">FREN<span>UGO</span></a><a href={base+'signals/'} class="press-pitch">↗ Сигналы</a><a href={tg} target="_blank" rel="noopener noreferrer" class="press-yahoo">telegram!</a></div></section>
-<section class="testimonials" aria-label="Разделы проекта"><div class="review-grid">{[0,1,2,3].map(col=><div class="review-column">{[cards[col],cards[col+4]].map(card=><article class="review"><div class={'avatar avatar-'+card[0]} aria-hidden="true">{card[0]}</div><h3>{card[1]}</h3><p>{card[2]}</p><div class="review-bottom"><span class="review-stars" aria-hidden="true">✦✦✦✦✦</span><a href={col===1?base+'stats/':tg} aria-label={'Подробнее: '+card[1]}>↗</a></div></article>)}</div>)}</div><a class="more-love" href={tg} target="_blank" rel="noopener noreferrer">Заглянуть в канал</a></section>
+<nav id="mobile-menu" class="mobile-menu" aria-label="Мобильная навигация" hidden><a href="#earn">О проекте ↗</a><a href="#how">Как это работает ↗</a><a href="#numbers">Результаты ↗</a><a href="#trade-gallery-title">Примеры графиков ↗</a><a href={tg} target="_blank" rel="noopener noreferrer">В Telegram ↗</a></nav>
+<main id="main"><section class="hero" id="top"><div class="hero-type" lang="ru"><h1 aria-label={`Лови ${words.join(", ").toLowerCase()}`}>ЛОВИ</h1><div class="word-window" aria-hidden="true"><div class="word-track">{[...words, words[0]].map(word => <div class:list={[{ "word-descender": word === "ВХОД" }]}>{word}</div>)}</div></div></div><div class="scene hero-coin coin-one" data-coin-motion={coinSpin.src} aria-hidden="true"><img class="coin-image" src={coinFront.src} width={coinFront.width} height={coinFront.height} alt="" decoding="async"/></div><div class="scene hero-coin coin-two" data-coin-motion={coinSpin.src} aria-hidden="true"><img class="coin-image" src={coinFront.src} width={coinFront.width} height={coinFront.height} alt="" decoding="async"/></div><div class="hero-bottom"><p>Не нужно сидеть у графиков весь день.<br/><span>До 3 сигналов в день. О входе — заранее.</span></p><div class="store-pair"><a href="#numbers" class="store-button"><span class="store-icon">↗</span><span>Статистика<small>Посмотреть данные</small></span></a><a href={tg} target="_blank" rel="noopener noreferrer" class="store-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>Telegram<small>Перейти в канал</small></span></a></div></div></section>
+<section class="press" aria-label="О проекте FRENUGO"><h2>Что внутри</h2><div class="press-logos"><a href="#numbers" class="press-axios">ИТОГИ</a><a href="#trade-gallery-title" class="press-bloomberg">Статистика</a><a href={tg} target="_blank" rel="noopener noreferrer" class="press-chicago">FREN<span>UGO</span></a><a href="#how" class="press-pitch">↗ Сигналы</a><a href={tg} target="_blank" rel="noopener noreferrer" class="press-yahoo">telegram!</a></div></section>
+<section class="testimonials" aria-label="Разделы проекта"><div class="review-grid">{[0,1,2,3].map(col=><div class="review-column">{[cards[col],cards[col+4]].map(card=><article class="review"><div class={'avatar avatar-'+card[0]} aria-hidden="true">{card[0]}</div><h3>{card[1]}</h3><p>{card[2]}</p><div class="review-bottom"><span class="review-stars" aria-hidden="true">✦✦✦✦✦</span><a href={card[3]} aria-label={'Подробнее: '+card[1]}>↗</a></div></article>)}</div>)}</div><a class="more-love" href={tg} target="_blank" rel="noopener noreferrer">Заглянуть в канал</a></section>
 <div class="earn-ticker" aria-hidden="true"><div class="ticker-track">{[0,1].map(()=><span>FRENUGO <i>Результаты и обновления</i> <b>✦</b> Следи за <i>цифрами</i> <b>✦</b> Заходи <i>в канал</i> <b>✦</b> </span>)}</div></div>
 <section class="intro" id="earn"><h2>Трейдинг<br/><span>по плану.<br/>В цифрах.</span></h2><div class="scene banknote note-left" data-scene="note" aria-hidden="true"></div><div class="scene banknote note-right" data-scene="note" aria-hidden="true"></div><div class="intro-copy"><p>FRENUGO — проект о торговле криптовалютами.</p><p>Результаты, статистика и свежие публикации.</p><p>Заходи в открытый канал.</p></div><h2 class="how-heading" id="how">Как это<br/>работает</h2></section>
 <section class="steps" aria-label="Как это работает">
@@ -52,7 +63,7 @@ const cards = [
       <p>Бот заранее присылает актив, направление<br/>и уровни входа, стопа и тейка.</p>
       <div class="step-actions">
         <a href={tg} target="_blank" rel="noopener noreferrer" aria-label="Открыть Telegram">↗</a>
-        <a href={base+'stats/'} aria-label="Открыть статистику">▥</a>
+        <a href="#trade-gallery-title" aria-label="Посмотреть графики">▥</a>
       </div>
     </div>
     <div class="step-art scene step-art--phone">
@@ -106,6 +117,60 @@ const cards = [
       style={`--x:${x}%;--y:${y}%;--dx:${dx}cqw;--dy:${dy}cqh;--size:${size}cqw;--tilt:${tilt}deg;--duration:${duration}s;--delay:${delay}s`}/>
   ))}
 </div><div class="warp-content"><h2>Результаты прошлых сделок</h2><div class="counter" data-value="4619">+4 619,00</div><div class="counter-unit">Итог в долларах*</div></div></section>
-<section class="final-cta"><h2>Открой <span class="final-brand">FRENUGO.</span></h2><p>Результаты, статистика и обновления — в открытом Telegram-канале.</p><div class="final-buttons"><a href={tg} target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>Telegram</span>↗</a><a href={base+'stats/'}><span class="final-stats-icon">▥</span><span>Статистика</span>↗</a></div></section></main>
-<footer class="bridge-footer"><div class="footer-first"><p>FRENUGO — результаты, статистика и Telegram.<br/>*Результат прошлых сделок по данным автора. Прошлые результаты не гарантируют будущих. Торговля связана с риском убытков.</p><div class="social-grid"><a href={tg} target="_blank" rel="noopener noreferrer">Telegram</a><a href={base+'stats/'}>Статистика</a><a href={base+'signals/'}>Сигналы</a><a href="#how">Как это работает</a></div></div><a class="footer-wordmark" href="#top" aria-label="FRENUGO — главная">FRENUGO</a><div class="footer-last"><span>© {new Date().getFullYear()} FRENUGO</span><div><a href={base+'sitemap.xml'}>Карта сайта</a><a href={base+'risks/'}>Риски торговли</a><a href={base+'privacy/'}>Конфиденциальность</a><a href={base+'terms/'}>Условия использования</a></div><a class="back-top" href="#top" aria-label="Наверх">↑</a></div></footer>
+<section class="trade-gallery" aria-labelledby="trade-gallery-title">
+  <h2 id="trade-gallery-title">Примеры графиков</h2>
+  <p>Отдельные скриншоты с торговыми уровнями и отметками сделок.</p>
+  <div class="trade-gallery-grid">
+    {chartColumns.map(column => (
+      <div class="trade-gallery-column">
+        {column.map(chart => <TradeScreenshot {...chart} />)}
+      </div>
+    ))}
+  </div>
+</section>
+<section class="final-cta"><h2>Открой <span class="final-brand">FRENUGO.</span></h2><p>Результаты, статистика и обновления — в открытом Telegram-канале.</p><div class="final-buttons"><a href={tg} target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m21 3-4 18-6-5-4 4 1-7 10-7-12 6-5-2Z" fill="currentColor"/></svg><span>Telegram</span>↗</a><a href="#numbers"><span class="final-stats-icon">▥</span><span>Статистика</span>↗</a></div></section></main>
+<footer class="bridge-footer"><div class="footer-first"><p>FRENUGO — результаты, статистика и Telegram.<br/>*Результат прошлых сделок по данным автора. Прошлые результаты не гарантируют будущих. Торговля связана с риском убытков. Материалы носят информационный характер. 18+.</p><div class="social-grid"><a href={tg} target="_blank" rel="noopener noreferrer">Telegram</a><a href="#numbers">Результаты</a><a href="#trade-gallery-title">Графики</a><a href="#how">Как это работает</a></div></div><a class="footer-wordmark" href="#top" aria-label="FRENUGO — главная">FRENUGO</a><div class="footer-last"><span>© {new Date().getFullYear()} FRENUGO</span><a class="back-top" href="#top" aria-label="Наверх">↑</a></div></footer>
 <script>import '../scripts/bridge';</script></body></html>
+
+<style>
+  .trade-gallery {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(28px, 4vw, 60px) var(--pad) clamp(70px, 9vw, 130px);
+  }
+
+  .trade-gallery h2 {
+    font-size: clamp(38px, 6vw, 92px);
+  }
+
+  .trade-gallery p {
+    margin-top: 18px;
+    color: #aaa;
+    line-height: 1.5;
+  }
+
+  .trade-gallery-grid {
+    position: relative;
+    z-index: 11;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(14px, 2vw, 28px);
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+
+  .trade-gallery-column {
+    display: grid;
+    align-content: start;
+    gap: inherit;
+  }
+
+  @media (max-width: 767px) {
+    .trade-gallery-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .footer-last > span {
+      width: auto;
+    }
+  }
+</style>
